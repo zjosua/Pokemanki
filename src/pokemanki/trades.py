@@ -56,6 +56,37 @@ class Trades:
         if cmd in ["0", "1", "2"]:
             self._make_trade(self.trades[int(cmd)][0], self.trades[int(cmd)][1])
 
+        if cmd == "Happy Easter, Exkywor":
+            import os
+
+            addon_path = os.path.dirname(__file__)
+            pokemon_dir = os.path.join(addon_path, "pokemon_images")
+            img_path = os.path.join(pokemon_dir, "Exkywor.png")
+
+            from PyQt6 import QtCore, QtWidgets
+            from aqt.qt import QDialog
+
+            class Ui_Dialog(object):
+                def setupUi(self, Dialog):
+                    Dialog.setObjectName("Dialog")
+                    Dialog.setWindowTitle(cmd)
+                    Dialog.resize(386, 332)
+                    self.gridLayout = QtWidgets.QGridLayout(Dialog)
+                    self.gridLayout.setObjectName("gridLayout")
+                    self.label = QtWidgets.QLabel(Dialog)
+                    self.label.setText(f'<img source="{img_path}" />')
+                    self.label.setObjectName("label")
+                    self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+
+            class EggDialog(QDialog):
+                def __init__(self, parent):
+                    super(EggDialog, self).__init__(parent=parent)
+                    self.dialog = Ui_Dialog()
+                    self.dialog.setupUi(self)
+
+            egg = EggDialog(self._trade_window)
+            return egg.exec()
+
     def _get_new_trades(self):
         """Get new trades."""
 
@@ -248,24 +279,8 @@ class Trades:
                     )
             displaylist.append(displaytext)
 
-        totallist = list(zip(possiblefits, displaylist))
-        possiblepokemon = QWidget()
-        inp, ok = QInputDialog.getItem(
-            possiblepokemon,
-            "Pokémanki",
-            "Choose a Pokemon to trade for %s" % have[0],
-            displaylist,
-            0,
-            False,
-        )
-        tradepokemon = []
-        if ok and inp:
-            for thing in totallist:
-                if inp in thing:
-                    tradepokemon = thing[0]
-                    displaytext = inp
-        if not tradepokemon:
-            return
+        displaytext = displaylist[0]
+        tradepokemon = possiblefits[0]
 
         confirmation = QMessageBox()
         confirmation.setWindowTitle("Pokémanki")
