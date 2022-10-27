@@ -25,7 +25,6 @@ Steps to reproduce the behavior:
 
 #### What have you tried?
 *Before we suggest or explore something you've already discovered to not work, tell us what you have already tried to fix the problem.*
-- 
 
 #### Screenshots
 *If applicable, add screenshots to help explain your problem.*
