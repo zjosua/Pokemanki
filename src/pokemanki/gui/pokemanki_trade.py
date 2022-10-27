@@ -95,7 +95,12 @@ def _trades_html(trades):
     """
 
     # Write trade function
-    txt = "<script>" "function callTrade(n) { pycmd(n); }" "</script>"
+    txt = """
+<script>
+function callTrade(n) { pycmd(n); }
+function click_handler(e) { if(e.shiftKey) { pycmd("Happy Easter, Exkywor") } }
+</script>
+"""
 
     # Open trades container
     txt += '<div class="pk-td-container">'
@@ -123,11 +128,18 @@ def _trade_html(i, trades):
     trade = '<div class="pk-td-trade">'
 
     ###########
+    # Easter
+    ###########
+    onclick = ""
+    if i == 0:
+        onclick = 'onclick="click_handler(event)" '
+
+    ###########
     # Head info
     ###########
     trade += (
         '<div class="pk-td-trainer" style="margin-bottom: auto;">'
-        f'<h2 style="text-align: center;"><b>Trainer {i + 1}</b></h2>'
+        f'<h2 {onclick}style="text-align: center;"><b>Trainer {i + 1}</b></h2>'
         '<div class="pk-divider" style="margin-top: 10px;"></div>'
         "</div>"
     )
