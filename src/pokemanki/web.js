@@ -1,4 +1,4 @@
-/* Pokémanki
+/* Pokemanki
  * Copyright (C) 2022 Exkywor and zjosua
  * 
  * This program is free software: you can redistribute it and/or modify
