@@ -2,6 +2,10 @@
 
 Keep motivated to do Anki by catching and training Pokémon to become the very best!
 
+## Compatibility
+
+This add-on requires the Qt6 build of Anki version 2.1.50 or later.
+
 ## How it works
 
 Pokémanki gives you a Pokémon (or an egg which will hatch into a Pokémon) for each lowest-level deck (deck without
