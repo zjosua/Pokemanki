@@ -7,6 +7,13 @@ assignees: ''
 
 ---
 
+#### Troubleshooting Checklist
+*Replace the space between the parentheses with an x to mark the items as verified.*
+- [ ] I have veryfied that my issue has not been reported yet in the [issue tracker](https://github.com/zjosua/Pokemanki/issues?q=is%3Aissue).
+      *If you have an issue that has already been reported, join the discussion of the existing issue instead of creating a new one.*
+- [ ] I am using the latest version of the add-on from AnkiWeb.
+- [ ] My Anki installation meets the [compatibility requirements](https://github.com/zjosua/Pokemanki#compatibility).
+
 #### Describe the bug
 *A clear and concise description of what the bug is.*
 
