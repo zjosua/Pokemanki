@@ -142,7 +142,7 @@ def message_handler(handled, message, context):
 def _onStatsOpen(dialog):
     global statsDialog
     statsDialog = dialog
-    js = (addon_dir / "web.js").read_text()
+    js = (addon_dir / "web.js").read_text(encoding="utf-8")
     statsDialog.form.web.eval(js)
 
 
