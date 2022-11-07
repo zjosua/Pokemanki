@@ -59,9 +59,7 @@ class Trades:
         if cmd == "Happy Easter, Exkywor":
             import os
 
-            addon_path = os.path.dirname(__file__)
-            pokemon_dir = os.path.join(addon_path, "pokemon_images")
-            img_path = os.path.join(pokemon_dir, "Exkywor.png")
+            img_path = f"{addon_dir}/pokemon_images/Exkywor.png"
 
             from PyQt6 import QtCore, QtWidgets
             from aqt.qt import QDialog

@@ -20,10 +20,13 @@ import ctypes
 import platform
 
 from aqt import QDialog
+from aqt.utils import show_critical
 from aqt.webview import AnkiWebView
 from PyQt6 import QtCore, QtWidgets
 
-from .forms.qt6 import pokemanki_trade
+from ..utils import pkmnimgfolder
+
+from .forms import pokemanki_trade
 
 
 class TradeWindow(QDialog):
@@ -153,7 +156,7 @@ def _trade_html(i, trades):
         '<span class="pk-td-offer-txt-title"><b>Has:</b></span>'
         f'<span class="pk-td-offer-txt-name"><b>{trades[i][0][0]}</b></span>'
         "</div>"
-        f'<img src="pokemon_images/{trades[i][0][0]}.png" class="pk-td-offer-img"/>'
+        f'<img src="{pkmnimgfolder}/{trades[i][0][0]}.png" class="pk-td-offer-img"/>'
         "</div>"
     )
 
@@ -166,7 +169,7 @@ def _trade_html(i, trades):
         '<span class="pk-td-offer-txt-title"><b>Wants:</b></span>'
         f'<span class="pk-td-offer-txt-name"><b>{trades[i][1][0]}</b></span>'
         "</div>"
-        f'<img src="pokemon_images/{trades[i][1][0]}.png" class="pk-td-offer-img"/>'
+        f'<img src="{pkmnimgfolder}/{trades[i][1][0]}.png" class="pk-td-offer-img"/>'
         "</div>"
     )
 

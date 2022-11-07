@@ -20,7 +20,6 @@ import os
 import shutil
 import random
 
-from anki.lang import _
 from aqt import mw
 
 from .utils import *
@@ -36,21 +35,6 @@ def pokemon_display(istagmon, wholecollection=True):
     :return: The html text to display.
     :rtype: str
     """
-
-    # Assign Pokémon Image and Progress Bar folder directory names
-    pkmnimgfolder = currentdirname / "pokemon_images"
-    progressbarfolder = currentdirname / "progress_bars"
-
-    # Move Pokémon Image folder to collection.media folder if not already there
-    # (Anki reads from here when running anki.stats.py)
-    if (not os.path.exists(f"{mediafolder}/pokemon_images")) and os.path.exists(
-        pkmnimgfolder
-    ):
-        shutil.copytree(pkmnimgfolder, f"{mediafolder}/pokemon_images")
-    if (not os.path.exists(f"{mediafolder}/progress_bars")) and os.path.exists(
-        progressbarfolder
-    ):
-        shutil.copytree(progressbarfolder, f"{mediafolder}/progress_bars")
 
     # Get list of Pokémon from tags or decks.
     #   For decks, if wholeCollection, get all assigned Pokémon and assign to Pokémon,
@@ -161,7 +145,7 @@ def _card_html(name, source, level, nickname="", multi=False):
     #############
     # Image
     #############
-    card += f'<img src="/pokemon_images/{_image_name(name, source)}.png" class="pk-st-card-img"/>'
+    card += f'<img src="{pkmnimgfolder}/{_image_name(name, source)}.png" class="pk-st-card-img"/>'
 
     #############
     # Bottom info
@@ -180,7 +164,7 @@ def _card_html(name, source, level, nickname="", multi=False):
     if name == "Egg":
         card += f'<span class="pk-st-card-xp">{_egg_hatch_text(level)}</span>'
     else:
-        card += f'<img src="/progress_bars/{_calculate_xp_progress(level)}.png" class="pk-st-card-xp"/>'
+        card += f'<img src="/_addons/{addon_package}/progress_bars/{_calculate_xp_progress(level)}.png" class="pk-st-card-xp"/>'
     card += "</div>"
 
     # End card
@@ -292,9 +276,9 @@ def _held_html(source):
     """
 
     held = ""
-    everstone_html = '<img src="/pokemon_images/item_Everstone.png" height="20px"/>'
-    megastone_html = '<img src="/pokemon_images/item_Mega_Stone.png" height="25px"/>'
-    alolan_html = '<img src="/pokemon_images/item_Alolan_Passport.png" height="25px"/>'
+    everstone_html = f'<img src="{pkmnimgfolder}/item_Everstone.png" height="20px"/>'
+    megastone_html = f'<img src="{pkmnimgfolder}/item_Mega_Stone.png" height="25px"/>'
+    alolan_html = f'<img src="{pkmnimgfolder}/item_Alolan_Passport.png" height="25px"/>'
 
     if _in_list("prestige", source):
         held += "<span>Prestiged </span>"

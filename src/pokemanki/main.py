@@ -22,6 +22,7 @@ from bs4 import BeautifulSoup
 
 from aqt import mw, gui_hooks
 from aqt.qt import *
+from aqt.utils import show_critical
 
 from .config import get_synced_conf, init_config
 from .display import pokemon_display
@@ -37,9 +38,11 @@ statsDialog = None
 tradeclass = object()
 tags = object()
 
-# Move Pokemon Image folder to collection.media folder if not already there (Anki reads from here when running anki.stats.py)
-copy_directory("pokemon_images")
+# Move CSS folder to collection.media folder if not already there (Anki reads from here when running anki.stats.py)
 copy_directory("pokemanki_css")
+
+# Add images to media server
+mw.addonManager.setWebExports(__name__, r"(pokemon_images|progress_bars)/.*png")
 
 
 def build_menu():
@@ -161,7 +164,7 @@ def replace_gears(deck_browser, content):
         deck_id = int(tr["id"])
         name = next((pokemon[0] for pokemon in pokemons if pokemon[1] == deck_id), None)
         if name:
-            tr.select("img.gears")[0]["src"] = "pokemon_images/" + name + ".png"
+            tr.select("img.gears")[0]["src"] = f"{pkmnimgfolder}/{name}.png"
             tr.select("img.gears")[0]["class"] = "gears pokemon"
     style = soup.new_tag("style")
     style.string = ".gears.pokemon{filter:none;opacity:1}"

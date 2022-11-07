@@ -29,10 +29,11 @@ from aqt.utils import showInfo
 from .config import get_synced_conf
 
 # Find current directory
+addon_package = mw.addonManager.addonFromModule(__name__)
 addon_dir = Path(__file__).parents[0]
 currentdirname = addon_dir
 # Assign Pokemon Image folder directory name
-pkmnimgfolder = addon_dir / "pokemon_images"
+pkmnimgfolder = f"/_addons/{addon_package}/pokemon_images"
 
 profilename = mw.pm.name
 profilefolder = Path(mw.pm.profileFolder())
@@ -118,21 +119,3 @@ def line(i: List[str], a: str, b: Union[int, str], bold: bool = True) -> None:
 
 def lineTbl(i: List[str]) -> str:
     return "<table width=400>" + "".join(i) + "</table>"
-
-
-def table_image_html(image_name, title=None):
-    if title is None:
-        title = image_name
-    image_el = ""
-    if image_name:
-        image_el = '<img src="/pokemon_images/{}.png" title="{}">'.format(
-            image_name, title
-        )
-    return "<td height=250 width=250 align=center>{}</td>".format(image_el)
-
-
-def table_text_html(main_text, sub_text="", bold=False):
-    bolded = "{}".format(main_text)
-    if bold:
-        bolded = "<b>{}</b>{}".format(main_text, sub_text)
-    return "<td height=30 width=250 align=center>{}</td>".format(bolded)
