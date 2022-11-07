@@ -22,7 +22,6 @@ from bs4 import BeautifulSoup
 
 from aqt import mw, gui_hooks
 from aqt.qt import *
-from aqt.utils import show_critical
 
 from .config import get_synced_conf, init_config
 from .display import pokemon_display

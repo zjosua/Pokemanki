@@ -20,7 +20,6 @@ import ctypes
 import platform
 
 from aqt import QDialog
-from aqt.utils import show_critical
 from aqt.webview import AnkiWebView
 from PyQt6 import QtCore, QtWidgets
 
