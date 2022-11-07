@@ -24,7 +24,7 @@ from aqt.utils import show_critical
 from aqt.webview import AnkiWebView
 from PyQt6 import QtCore, QtWidgets
 
-from ..utils import pkmnimgfolder
+from ..utils import cssfolder, pkmnimgfolder
 
 from .forms import pokemanki_trade
 

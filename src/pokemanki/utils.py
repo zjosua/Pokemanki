@@ -31,7 +31,6 @@ from .config import get_synced_conf
 # Find current directory
 addon_package = mw.addonManager.addonFromModule(__name__)
 addon_dir = Path(__file__).parents[0]
-currentdirname = addon_dir
 # Assign Pokemon Image folder directory name
 pkmnimgfolder = f"/_addons/{addon_package}/pokemon_images"
 cssfolder = f"/_addons/{addon_package}/pokemanki_css"

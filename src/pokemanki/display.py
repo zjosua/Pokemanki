@@ -218,7 +218,7 @@ def _image_name(name, source):
     :rtype: str
     """
 
-    pkmnimgfolder = currentdirname / "pokemon_images"
+    pkmnimgfolder = addon_dir / "pokemon_images"
 
     fullname = name
     if _in_list("everstone", source):

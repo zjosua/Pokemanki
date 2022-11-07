@@ -319,49 +319,49 @@ def get_pokemon_records():
     :rtype: List
     """
     pokemon_records = []
-    csv_fpath = currentdirname / "pokemon_evolutions" / "pokemon_gen1.csv"
+    csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen1.csv"
     pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
 
     if get_local_conf()["gen2"]:
-        csv_fpath = currentdirname / "pokemon_evolutions" / "pokemon_gen2.csv"
+        csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen2.csv"
         pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
 
         if get_local_conf()["gen4_evolutions"]:
             csv_fpath = (
-                currentdirname / "pokemon_evolutions" / "pokemon_gen1_plus2_plus4.csv"
+                addon_dir / "pokemon_evolutions" / "pokemon_gen1_plus2_plus4.csv"
             )
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
-            csv_fpath = currentdirname / "pokemon_evolutions" / "pokemon_gen2_plus4.csv"
+            csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen2_plus4.csv"
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
         else:
             csv_fpath = (
-                currentdirname / "pokemon_evolutions" / "pokemon_gen1_plus2_no4.csv"
+                addon_dir / "pokemon_evolutions" / "pokemon_gen1_plus2_no4.csv"
             )
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
-            csv_fpath = currentdirname / "pokemon_evolutions" / "pokemon_gen2_no4.csv"
+            csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen2_no4.csv"
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
     else:
         if get_local_conf()["gen4_evolutions"]:
             # a lot of gen 4 evolutions that affect gen 1 also include gen 2 evolutions
             # so let's just include gen 2 for these evolution lines
             csv_fpath = (
-                currentdirname / "pokemon_evolutions" / "pokemon_gen1_plus2_plus4.csv"
+                addon_dir / "pokemon_evolutions" / "pokemon_gen1_plus2_plus4.csv"
             )
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
         else:
             csv_fpath = (
-                currentdirname / "pokemon_evolutions" / "pokemon_gen1_no2_no4.csv"
+                addon_dir / "pokemon_evolutions" / "pokemon_gen1_no2_no4.csv"
             )
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
 
     if get_local_conf()["gen3"]:
-        csv_fpath = currentdirname / "pokemon_evolutions" / "pokemon_gen3.csv"
+        csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen3.csv"
         pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
     if get_local_conf()["gen4"]:
-        csv_fpath = currentdirname / "pokemon_evolutions" / "pokemon_gen4.csv"
+        csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen4.csv"
         pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
     if get_local_conf()["gen5"]:
-        csv_fpath = currentdirname / "pokemon_evolutions" / "pokemon_gen5.csv"
+        csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen5.csv"
         pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
 
     return pokemon_records

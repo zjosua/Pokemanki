@@ -72,7 +72,7 @@ def load_pokemon_gen_all(
     pokemonlist, tiers, evolutionLevel1, evolution1, evolutionLevel2, evolution2
 ):
     def load_pokemon_gen(csv_name):
-        csv_fpath = currentdirname / "pokemon_evolutions" / csv_name
+        csv_fpath = addon_dir / "pokemon_evolutions" / csv_name
         loadPokemonGenerations(
             csv_fpath,
             pokemonlist,
