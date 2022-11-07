@@ -30,7 +30,7 @@ from .gui.pokemanki_options import invoke_pokemanki_options
 from .pokemon import *
 from .tags import Tags
 from .trades import Trades
-from .utils import copy_directory
+from .utils import copy_directory, cssfolder, pkmnimgfolder
 
 
 statsDialog = None
@@ -38,11 +38,10 @@ statsDialog = None
 tradeclass = object()
 tags = object()
 
-# Move CSS folder to collection.media folder if not already there (Anki reads from here when running anki.stats.py)
-copy_directory("pokemanki_css")
-
-# Add images to media server
-mw.addonManager.setWebExports(__name__, r"(pokemon_images|progress_bars)/.*png")
+# Add images and CSS to media server
+mw.addonManager.setWebExports(
+    __name__, r"(pokemon_images|progress_bars|pokemanki_css)/.*(css|png)"
+)
 
 
 def build_menu():

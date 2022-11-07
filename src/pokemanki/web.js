@@ -25,7 +25,7 @@ Pokemanki.addPokemanki = function(){
     rangeBoxPad.after(divEl);
 
     link = document.createElement('link');
-    link.href = "/pokemanki_css/view_stats.css";
+    link.href = "/_addons/pokemanki/pokemanki_css/view_stats.css";
     link.rel = 'stylesheet';
     document.head.appendChild(link);
 }

@@ -72,7 +72,7 @@ class TradeWindow(QDialog):
 
         self.dialog.webEngineView.stdHtml(
             body=_trades_html(trades),
-            css=["/pokemanki_css/view_trade.css", "/pokemanki_css/main.css"],
+            css=[f"{cssfolder}/view_trade.css", f"{cssfolder}/main.css"],
             context=self,
         )
 
