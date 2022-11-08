@@ -136,7 +136,7 @@ def message_handler(handled, message, context):
         term = message[len(starts) :]
         # Todo: implement selective
         return (True, None)
-    statsDialog.form.web.eval("Pokemanki.setPokemanki(`{}`)".format(html))
+    statsDialog.form.web.eval(f"Pokemanki.setPokemanki(`{html}`)")
     return (True, None)
 
 

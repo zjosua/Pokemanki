@@ -23,7 +23,7 @@ from .utils import *
 
 
 def cardIdsFromDeckIds(queryDb, deckIds):
-    query = "select id from cards where did in {}".format(ids2str(deckIds))
+    query = f"select id from cards where did in {ids2str(deckIds)}"
     cardIds = [i[0] for i in queryDb.all(query)]
     return cardIds
 
