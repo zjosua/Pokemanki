@@ -105,7 +105,7 @@ def _card_html(name, source, level, nickname="", multi=False):
     Generate the html text for a Pokémon card.
 
     :param str name: Name of the Pokémon.
-    :param source: Id of the deck or name of the tqg the Pokémon belongs to.
+    :param source: Id of the deck or name of the tag the Pokémon belongs to.
     :param int level: The Pokémon's lvl.
     :param str nickname: Pokémon's nickname, if it has any.
     :param bool multi: True if multiple Pokémon are being rendered.
