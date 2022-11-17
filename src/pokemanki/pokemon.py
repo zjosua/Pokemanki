@@ -27,44 +27,34 @@ from .config import (
 from .tags import Tags
 from .utils import *
 
+
 # Nickname Settings
-
-
-def Nickname():
+def nickname():
     deckmonlist, f = get_pokemons()
     if deckmonlist is None:
         return
 
     displaylist = []
     for item in deckmonlist:
-        deckname = mw.col.decks.name(item[1])
-        if len(item) == 4:
+        deckortag = mw.col.decks.name(item[1]) if f == "decks" else item[1]
+        if len(item) == 4:  # Pokémon has nickname
             if item[2] < 5:
-                displaytext = "%s - Egg from %s" % (item[3], deckname)
+                displaytext = f"{item[3]} - Egg from {deckortag}"
             elif item[0].startswith("Eevee"):
-                displaytext = "%s - Eevee (Level %s) from %s" % (
-                    item[3],
-                    int(item[2]),
-                    deckname,
+                displaytext = (
+                    f"{item[3]} - Eevee (Level {int(item[2])}) from {deckortag}"
                 )
             else:
-                displaytext = "%s - %s (Level %s) from %s" % (
-                    item[3],
-                    item[0],
-                    int(item[2]),
-                    deckname,
+                displaytext = (
+                    f"{item[3]} - {item[0]} (Level {int(item[2])}) from {deckortag}"
                 )
-        else:
+        else:  # Pokémon without nickname
             if item[2] < 5:
-                displaytext = "Egg from %s" % (deckname)
+                displaytext = f"Egg from {deckortag}"
             elif item[0].startswith("Eevee"):
-                displaytext = "Eevee (Level %s) from %s" % (int(item[2]), deckname)
+                displaytext = f"Eevee (Level {int(item[2])}) from {deckortag}"
             else:
-                displaytext = "%s (Level %s) from %s" % (
-                    item[0],
-                    int(item[2]),
-                    deckname,
-                )
+                displaytext = f"{item[0]} (Level {int(item[2])}) from {deckortag}"
         displaylist.append(displaytext)
     totallist = list(zip(deckmonlist, displaylist))
     nicknamewindow = QWidget()
@@ -90,7 +80,7 @@ def Nickname():
     inp, ok = QInputDialog.getText(
         nicknamewindow,
         "Pokémanki",
-        ("Enter a new nickname for %s (leave blank to remove nickname)" % displaytext),
+        f"Enter a new nickname for {displaytext} (leave blank to remove nickname)",
     )
     if ok:
         if inp:

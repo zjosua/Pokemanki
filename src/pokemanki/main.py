@@ -67,7 +67,7 @@ def build_menu():
     # Connect actions to functions
     tradeclass = Trades()
     tags = Tags()
-    qconnect(nicknameaction.triggered, Nickname)
+    qconnect(nicknameaction.triggered, nickname)
     qconnect(resetaction.triggered, reset_pokemanki)
     qconnect(tradeaction.triggered, tradeclass.open)
     qconnect(toggleaction.triggered, Toggle)
