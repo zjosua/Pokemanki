@@ -133,7 +133,7 @@ def Nickname():
     if f == "tags":
         save_synced_conf("tagmon_list", modifieddeckmonlist)
     else:
-        save_synced_conf("pokemanki_list", modifieddeckmonlist)
+        save_synced_conf("pokemon_list", modifieddeckmonlist)
 
 
 def Toggle():
