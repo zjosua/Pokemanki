@@ -135,76 +135,81 @@ class Tags:
             if not i[1]:
                 parent = QTreeWidgetItem(tree)
                 parent.setText(0, i[0])
-                parent.setFlags(parent.flags() | Qt.ItemIsUserCheckable)
+                parent.setFlags(parent.flags() | Qt.ItemFlag.ItemIsUserCheckable)
                 if i[0] in self.savedtags:
-                    parent.setCheckState(0, Qt.Checked)
+                    parent.setCheckState(0, Qt.CheckState.Checked)
                 else:
-                    parent.setCheckState(0, Qt.Unchecked)
+                    parent.setCheckState(0, Qt.CheckState.Unchecked)
                 parentlist.append([parent, []])
             else:
                 parent = QTreeWidgetItem(tree)
                 parent.setText(0, i[0])
-                parent.setFlags(parent.flags() | Qt.ItemIsUserCheckable)
+                parent.setFlags(parent.flags() | Qt.ItemFlag.ItemIsUserCheckable)
                 if i[0] in self.savedtags:
-                    parent.setCheckState(0, Qt.Checked)
+                    parent.setCheckState(0, Qt.CheckState.Checked)
                 else:
-                    parent.setCheckState(0, Qt.Unchecked)
+                    parent.setCheckState(0, Qt.CheckState.Unchecked)
                 childlist = []
                 for j in i[1]:
                     if not j[1]:
                         child = QTreeWidgetItem(parent)
-                        child.setFlags(child.flags() | Qt.ItemIsUserCheckable)
+                        child.setFlags(child.flags() | Qt.ItemFlag.ItemIsUserCheckable)
                         child.setText(0, j[0])
                         if i[0] + "::" + j[0] in self.savedtags:
-                            child.setCheckState(0, Qt.Checked)
+                            child.setCheckState(0, Qt.CheckState.Checked)
                         else:
-                            child.setCheckState(0, Qt.Unchecked)
+                            child.setCheckState(0, Qt.CheckState.Unchecked)
                         childlist.append([child, []])
                     else:
                         child = QTreeWidgetItem(parent)
-                        child.setFlags(child.flags() | Qt.ItemIsUserCheckable)
+                        child.setFlags(child.flags() | Qt.ItemFlag.ItemIsUserCheckable)
                         child.setText(0, j[0])
                         if i[0] + "::" + j[0] in self.savedtags:
-                            child.setCheckState(0, Qt.Checked)
+                            child.setCheckState(0, Qt.CheckState.Checked)
                         else:
-                            child.setCheckState(0, Qt.Unchecked)
+                            child.setCheckState(0, Qt.CheckState.Unchecked)
                         grandchildlist = []
                         for k in j[1]:
                             if not k[1]:
                                 grandchild = QTreeWidgetItem(child)
                                 grandchild.setFlags(
-                                    grandchild.flags() | Qt.ItemIsUserCheckable
+                                    grandchild.flags() | Qt.ItemFlag.ItemIsUserCheckable
                                 )
                                 grandchild.setText(0, k[0])
                                 if i[0] + "::" + j[0] + "::" + k[0] in self.savedtags:
-                                    grandchild.setCheckState(0, Qt.Checked)
+                                    grandchild.setCheckState(0, Qt.CheckState.Checked)
                                 else:
-                                    grandchild.setCheckState(0, Qt.Unchecked)
+                                    grandchild.setCheckState(0, Qt.CheckState.Unchecked)
                                 grandchildlist.append([grandchild, []])
                             else:
                                 grandchild = QTreeWidgetItem(child)
                                 grandchild.setFlags(
-                                    grandchild.flags() | Qt.ItemIsUserCheckable
+                                    grandchild.flags() | Qt.ItemFlag.ItemIsUserCheckable
                                 )
                                 grandchild.setText(0, k[0])
                                 if i[0] + "::" + j[0] + "::" + k[0] in self.savedtags:
-                                    grandchild.setCheckState(0, Qt.Checked)
+                                    grandchild.setCheckState(0, Qt.CheckState.Checked)
                                 else:
-                                    grandchild.setCheckState(0, Qt.Unchecked)
+                                    grandchild.setCheckState(0, Qt.CheckState.Unchecked)
                                 greatgrandchildlist = []
                                 for l in k[1]:
                                     greatgrandchild = QTreeWidgetItem(grandchild)
                                     greatgrandchild.setFlags(
-                                        greatgrandchild.flags() | Qt.ItemIsUserCheckable
+                                        greatgrandchild.flags()
+                                        | Qt.ItemFlag.ItemIsUserCheckable
                                     )
                                     greatgrandchild.setText(0, l[0])
                                     if (
                                         i[0] + "::" + j[0] + "::" + k[0] + "::" + l[0]
                                         in self.savedtags
                                     ):
-                                        greatgrandchild.setCheckState(0, Qt.Checked)
+                                        greatgrandchild.setCheckState(
+                                            0, Qt.CheckState.Checked
+                                        )
                                     else:
-                                        greatgrandchild.setCheckState(0, Qt.Unchecked)
+                                        greatgrandchild.setCheckState(
+                                            0, Qt.CheckState.Unchecked
+                                        )
                                     greatgrandchildlist.append([greatgrandchild, []])
                                 grandchildlist.append([grandchild, greatgrandchildlist])
                         childlist.append([child, grandchildlist])
@@ -217,15 +222,15 @@ class Tags:
     def tagAssign(self):
         checked = self.checked = []
         for item in self.parentlist:
-            if item[0].checkState(0) == Qt.Checked:
+            if item[0].checkState(0) == Qt.CheckState.Checked:
                 checked.append(item[0].text(0))
             if item[1]:
                 for jtem in item[1]:
-                    if jtem[0].checkState(0) == Qt.Checked:
+                    if jtem[0].checkState(0) == Qt.CheckState.Checked:
                         checked.append(item[0].text(0) + "::" + jtem[0].text(0))
                     if jtem[1]:
                         for ktem in jtem[1]:
-                            if ktem[0].checkState(0) == Qt.Checked:
+                            if ktem[0].checkState(0) == Qt.CheckState.Checked:
                                 checked.append(
                                     item[0].text(0)
                                     + "::"
@@ -235,7 +240,7 @@ class Tags:
                                 )
                             if ktem[1]:
                                 for ltem in ktem[1]:
-                                    if ltem[0].checkState(0) == Qt.Checked:
+                                    if ltem[0].checkState(0) == Qt.CheckState.Checked:
                                         checked.append(
                                             item[0].text(0)
                                             + "::"

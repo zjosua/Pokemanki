@@ -230,9 +230,9 @@ def FirstPokemon():
         msgbox = QMessageBox()
         msgbox.setWindowTitle("Pokémanki")
         msgbox.setText(f"Choose a starter Pokémon for {inp}.")
-        msgbox.addButton("Bulbasaur", QMessageBox.AcceptRole)
-        msgbox.addButton("Charmander", QMessageBox.AcceptRole)
-        msgbox.addButton("Squirtle", QMessageBox.AcceptRole)
+        msgbox.addButton("Bulbasaur", QMessageBox.ButtonRole.AcceptRole)
+        msgbox.addButton("Charmander", QMessageBox.ButtonRole.AcceptRole)
+        msgbox.addButton("Squirtle", QMessageBox.ButtonRole.AcceptRole)
         msgbox.exec()
         deckmon = msgbox.clickedButton().text()
         if deckmon:
