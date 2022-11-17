@@ -465,37 +465,37 @@ def MultiPokemon(wholeCollection):
                 if thing[1] == item[0]:
                     if name == "Eevee" or name == "Egg":
                         if nickname:
-                            if (
+                            if [
                                 thing[0],
                                 thing[1],
                                 Level,
                                 nickname,
-                            ) in modifiedpokemontotal:
+                            ] in modifiedpokemontotal:
                                 pass
                             else:
                                 modifiedpokemontotal.append(
                                     [thing[0], thing[1], Level, nickname]
                                 )
                         else:
-                            if (thing[0], thing[1], Level) in modifiedpokemontotal:
+                            if [thing[0], thing[1], Level] in modifiedpokemontotal:
                                 pass
                             else:
                                 modifiedpokemontotal.append([thing[0], thing[1], Level])
                     else:
                         if nickname:
-                            if (
+                            if [
                                 name,
                                 thing[1],
                                 Level,
                                 nickname,
-                            ) in modifiedpokemontotal:
+                            ] in modifiedpokemontotal:
                                 pass
                             else:
                                 modifiedpokemontotal.append(
                                     [name, thing[1], Level, nickname]
                                 )
                         else:
-                            if (name, thing[1], Level) in modifiedpokemontotal:
+                            if [name, thing[1], Level] in modifiedpokemontotal:
                                 pass
                             else:
                                 modifiedpokemontotal.append([name, thing[1], Level])
@@ -659,25 +659,25 @@ def TagPokemon():
                 if thing[1] == item[0]:
                     if name == "Eevee" or name == "Egg":
                         if nickname:
-                            if (thing[0], thing[1], Level, nickname) in modifiedtagmon:
+                            if [thing[0], thing[1], Level, nickname] in modifiedtagmon:
                                 pass
                             else:
                                 modifiedtagmon.append(
                                     (thing[0], thing[1], Level, nickname)
                                 )
                         else:
-                            if (thing[0], thing[1], Level) in modifiedtagmon:
+                            if [thing[0], thing[1], Level] in modifiedtagmon:
                                 pass
                             else:
                                 modifiedtagmon.append((thing[0], thing[1], Level))
                     else:
                         if nickname:
-                            if (name, thing[1], Level, nickname) in modifiedtagmon:
+                            if [name, thing[1], Level, nickname] in modifiedtagmon:
                                 pass
                             else:
                                 modifiedtagmon.append((name, thing[1], Level, nickname))
                         else:
-                            if (name, thing[1], Level) in modifiedtagmon:
+                            if [name, thing[1], Level] in modifiedtagmon:
                                 pass
                             else:
                                 modifiedtagmon.append((name, thing[1], Level))

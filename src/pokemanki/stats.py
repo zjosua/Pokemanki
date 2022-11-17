@@ -71,7 +71,12 @@ def deckStats(deck_ids):
 
 
 def MultiStats(wholeCollection):
-    "Retrieve id and ivl for each subdeck that does not have subdecks itself"
+    """Retrieve id and ivl for each subdeck that does not have subdecks itself
+    
+    :param bool wholeCollection:
+    :return: List of tuples with decks and their cards (deck_id, [[card_id, interval], ...])
+    :rtype: List
+    """
     # Get list of subdecks
     if wholeCollection:
         # Get results for all subdecks in collection
