@@ -254,14 +254,10 @@ def giveEverstone():
 
     everstoneables = []
     for item in pokemon:
-        if f:
-            cb = "%s (Level %s) from %s" % (item[0], item[2], item[1])
+        if f == "tags":
+            cb = f"{item[0]} (Level {item[2]}) from {item[1]}"
         else:
-            cb = "%s (Level %s) from %s" % (
-                item[0],
-                item[2],
-                mw.col.decks.name(item[1]),
-            )
+            cb = f"{item[0]} (Level {item[2]}) from {mw.col.decks.name(item[1])}"
         if item[1] in everstonelist:
             continue
         elif cb in everstoneables:
@@ -284,7 +280,7 @@ def giveEverstone():
         textlist = inp.split(" from ")
         item = textlist[1]
         everstone_pokemon_name = inp.split(" (Level ")[0]
-        if f:
+        if f == "tags":
             everstonelist.append(item)
             everstonepokemonlist.append(everstone_pokemon_name)
         else:
@@ -310,10 +306,10 @@ def takeEverstone():
     for thing in everstonelist:
         for item in pokemon:
             if item[1] == thing:
-                if f:
-                    cb = "%s from %s" % (item[0], item[1])
+                if f == "tags":
+                    cb = f"{item[0]} from {item[1]}"
                 else:
-                    cb = "%s from %s" % (item[0], mw.col.decks.name(item[1]))
+                    cb = f"{item[0]} from {mw.col.decks.name(item[1])}"
                 if cb in possibleuneverstones:
                     continue
                 else:
@@ -332,7 +328,7 @@ def takeEverstone():
     if inp and ok:
         textlist = inp.split(" from ")
         item = textlist[1]
-        if f:
+        if f == "tags":
             everstonelist.remove(item)
             everstonepokemonlist.remove(textlist[0])
         else:
@@ -352,14 +348,10 @@ def giveMegastone():
     megastoneables = []
     for item in pokemon:
         if item[2] >= 70:
-            if f:
-                cb = "%s (Level %s) from %s" % (item[0], item[2], item[1])
+            if f == "tags":
+                cb = f"{item[0]} (Level {item[2]}) from {item[1]}"
             else:
-                cb = "%s (Level %s) from %s" % (
-                    item[0],
-                    item[2],
-                    mw.col.decks.name(item[1]),
-                )
+                cb = f"{item[0]} (Level {item[2]}) from {mw.col.decks.name(item[1])}"
             if item[1] in megastonelist:
                 continue
             elif cb in megastoneables:
@@ -383,7 +375,7 @@ def giveMegastone():
     if inp and ok:
         textlist = inp.split(" from ")
         item = textlist[1]
-        if f:
+        if f == "tags":
             megastonelist.append(item)
         else:
             megastonelist.append(mw.col.decks.id(item))
@@ -409,10 +401,10 @@ def takeMegastone():
     for thing in megastonelist:
         for item in pokemon:
             if item[1] == thing:
-                if f:
-                    cb = "%s from %s" % (item[0], item[1])
+                if f == "tags":
+                    cb = f"{item[0]} from {item[1]}"
                 else:
-                    cb = "%s from %s" % (item[0], mw.col.decks.name(item[1]))
+                    cb = f"{item[0]} from {mw.col.decks.name(item[1])}"
                 if cb in possibleunmegastones:
                     continue
                 else:
@@ -431,7 +423,7 @@ def takeMegastone():
     if inp and ok:
         textlist = inp.split(" from ")
         item = textlist[1]
-        if f:
+        if f == "tags":
             megastonelist.remove(item)
         else:
             megastonelist.remove(mw.col.decks.id(item))
@@ -449,14 +441,10 @@ def giveAlolanPassport():
 
     alolanables = []
     for item in pokemon:
-        if f:
-            cb = "%s (Level %s) from %s" % (item[0], item[2], item[1])
+        if f == "tags":
+            cb = f"{item[0]} (Level {item[2]}) from {item[1]}"
         else:
-            cb = "%s (Level %s) from %s" % (
-                item[0],
-                item[2],
-                mw.col.decks.name(item[1]),
-            )
+            cb = f"{item[0]} (Level {item[2]}) from {mw.col.decks.name(item[1])}"
         if item[1] in alolanlist:
             continue
         elif cb in alolanables:
@@ -480,7 +468,7 @@ def giveAlolanPassport():
         textlist = inp.split(" from ")
         item = textlist[1]
         alolan_pokemon_name = inp.split(" (Level ")[0]
-        if f:
+        if f == "tags":
             alolanlist.append(item)
         else:
             alolanlist.append(mw.col.decks.id(item))
@@ -504,10 +492,10 @@ def takeAlolanPassport():
     for thing in alolanlist:
         for item in pokemon:
             if item[1] == thing:
-                if f:
-                    cb = "%s from %s" % (item[0], item[1])
+                if f == "tags":
+                    cb = f"{item[0]} from {item[1]}"
                 else:
-                    cb = "%s from %s" % (item[0], mw.col.decks.name(item[1]))
+                    cb = f"{item[0]} from {mw.col.decks.name(item[1])}"
                 if cb in possibleunalolans:
                     continue
                 else:
@@ -526,7 +514,7 @@ def takeAlolanPassport():
     if inp and ok:
         textlist = inp.split(" from ")
         item = textlist[1]
-        if f:
+        if f == "tags":
             alolanlist.remove(item)
         else:
             alolanlist.remove(mw.col.decks.id(item))
@@ -544,14 +532,10 @@ def PrestigePokemon():
     possibleprestiges = []
     for item in pokemon:
         if item[2] >= 60:
-            if f:
-                cb = "%s (Level %s) from %s" % (item[0], item[2], item[1])
+            if f == "tags":
+                cb = f"{item[0]} (Level {item[2]}) from {item[1]}"
             else:
-                cb = "%s (Level %s) from %s" % (
-                    item[0],
-                    item[2],
-                    mw.col.decks.name(item[1]),
-                )
+                cb = f"{item[0]} (Level {item[2]}) from {mw.col.decks.name(item[1])}"
             if item[1] in prestigelist:
                 continue
             elif cb in possibleprestiges:
@@ -575,7 +559,7 @@ def PrestigePokemon():
     if inp and ok:
         textlist = inp.split(" from ")
         item = textlist[1]
-        if f:
+        if f == "tags":
             prestigelist.append(item)
         else:
             prestigelist.append(mw.col.decks.id(item))
@@ -599,10 +583,10 @@ def UnprestigePokemon():
     for thing in prestigelist:
         for item in pokemon:
             if item[1] == thing:
-                if f:
-                    cb = "%s from %s" % (item[0], item[1])
+                if f == "tags":
+                    cb = f"{item[0]} from {item[1]}"
                 else:
-                    cb = "%s from %s" % (item[0], mw.col.decks.name(item[1]))
+                    cb = f"{item[0]} from {mw.col.decks.name(item[1])}"
                 if cb in possibleunprestiges:
                     continue
                 else:
@@ -624,7 +608,7 @@ def UnprestigePokemon():
     if inp and ok:
         textlist = inp.split(" from ")
         item = textlist[1]
-        if f:
+        if f == "tags":
             prestigelist.remove(item)
         else:
             prestigelist.remove(mw.col.decks.id(item))
