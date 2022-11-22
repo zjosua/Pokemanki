@@ -19,9 +19,15 @@
 import ctypes
 import platform
 
-from aqt import QDialog
+from typing import TYPE_CHECKING
+
+from aqt.qt import QDialog, qtmajor
 from aqt.webview import AnkiWebView
-from PyQt6 import QtCore, QtWidgets
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6 import QtWidgets
+else:
+    from PyQt5 import QtWidgets
 
 from ..utils import cssfolder, pkmnimgfolder
 
