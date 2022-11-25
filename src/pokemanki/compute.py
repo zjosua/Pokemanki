@@ -19,6 +19,8 @@
 import csv
 import random
 
+from typing import List, Tuple, Union
+
 from aqt import mw
 from aqt.qt import *
 from aqt.utils import showInfo
@@ -29,14 +31,14 @@ from .stats import MultiStats, TagStats, cardInterval, cardIdsFromDeckIds
 
 
 def loadPokemonGenerations(
-    csv_fpath,
-    pokemonlist,
-    tiers,
-    evolutionLevel1,
-    evolution1,
-    evolutionLevel2,
-    evolution2,
-):
+    csv_fpath: Union[str, bytes],
+    pokemonlist: List[str],
+    tiers: List[str],
+    evolutionLevel1: List[Union[int, None]],
+    evolution1: List[Union[str, None]],
+    evolutionLevel2: List[Union[int, None]],
+    evolution2: List[Union[str, None]],
+) -> None:
     with open(csv_fpath, "r") as csv_file:
         csv_reader = csv.DictReader(csv_file, delimiter=",")
         for line in csv_reader:
@@ -69,9 +71,14 @@ def loadPokemonGenerations(
 
 
 def load_pokemon_gen_all(
-    pokemonlist, tiers, evolutionLevel1, evolution1, evolutionLevel2, evolution2
-):
-    def load_pokemon_gen(csv_name):
+    pokemonlist: List[str],
+    tiers: List[str],
+    evolutionLevel1: List[Union[int, None]],
+    evolution1: List[Union[str, None]],
+    evolutionLevel2: List[Union[int, None]],
+    evolution2: List[Union[str, None]],
+) -> None:
+    def load_pokemon_gen(csv_name: str) -> None:
         csv_fpath = addon_dir / "pokemon_evolutions" / csv_name
         loadPokemonGenerations(
             csv_fpath,
@@ -115,7 +122,7 @@ def alertMsgText(
     previousLevel: int,
     nickname: str,
     already_assigned: bool,
-):
+) -> str:
     prestigelist = get_synced_conf()["prestigelist"]
     msgtxt = ""
     if already_assigned == True:
@@ -177,7 +184,7 @@ def alertMsgText(
         return ""
 
 
-def randomStarter():
+def randomStarter() -> List[str]:
     available_generations = [1]
     if get_local_conf()["gen2"]:
         available_generations.append(2)
@@ -201,7 +208,7 @@ def randomStarter():
         return ["Snivy", "Tepig", "Oshawott"]
 
 
-def FirstPokemon():
+def FirstPokemon() -> None:
     deckmonlist = []
     deckmon = ""
     deckmonlist = get_synced_conf()["pokemon_list"]
@@ -266,10 +273,27 @@ def FirstPokemon():
         return
 
 
-def getPokemonIndex(pokemon_name, pokemons1, pokemons2, pokemons3):
-    "Returns a string of integer because 0 is a falsey value, while '0' is truthy"
+def getPokemonIndex(
+    pokemon_name: str,
+    pokemons1: List[str],
+    pokemons2: List[Union[str, None]],
+    pokemons3: List[Union[str, None]],
+) -> str:
+    """Returns the index of a Pokémon in the list of Pokémon
 
-    def getIndex(pokemons):
+    Returns a string of integer because 0 is a falsey value, while '0' is
+    truthy.
+    pokemon_name should exist in only one of the lists
+
+    :param str pokemon_name: name of Pokémon whose index is requested
+    :param List pokemons1: 1st list in which the Pokémon should be searched for
+    :param List pokemons2: 2nd list in which the Pokémon should be searched for
+    :param List pokemons3: 3rd list in which the Pokémon should be searched for
+    :rtype: str or None
+    :return: index of pokemon_name in the list it was found in or None
+    """
+
+    def getIndex(pokemons: List[Union[str, None]]) -> Union[str, None]:
         try:
             return str(pokemons.index(pokemon_name))
         except:
@@ -278,13 +302,15 @@ def getPokemonIndex(pokemon_name, pokemons1, pokemons2, pokemons3):
     return getIndex(pokemons1) or getIndex(pokemons2) or getIndex(pokemons3)
 
 
-def MultiPokemon(wholeCollection):
+def MultiPokemon(
+    wholeCollection: bool,
+) -> Union[List[Union[Tuple[str, int, float, str], Tuple[str, int, float]]], None]:
     """
     Generate an array of DeckPokemon
 
     :param bool wholeCollection: True if multiple Pokemon, False if single.
-    :return: Array of DeckPokemon.
-    :rtype: Array
+    :return: List of DeckPokemon.
+    :rtype: List or None
     """
 
     FirstPokemon()
@@ -513,12 +539,14 @@ def MultiPokemon(wholeCollection):
     return multiData
 
 
-def TagPokemon():
+def TagPokemon() -> Union[
+    List[Union[Tuple[str, str, float, str], Tuple[str, str, float]]], None
+]:
     """
     Generate an array of TagPokemon
 
-    :return: Array of TagPokemon.
-    :rtype: Array
+    :return: List of TagPokemon.
+    :rtype: List
     """
 
     tagmonlist = get_synced_conf()["tagmon_list"]

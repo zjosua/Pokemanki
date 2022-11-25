@@ -20,13 +20,15 @@ import os
 import shutil
 import random
 
+from typing import List, Tuple, Union
+
 from aqt import mw
 
 from .utils import *
 from .compute import MultiPokemon, TagPokemon
 
 
-def pokemon_display(istagmon, wholecollection=True):
+def pokemon_display(istagmon: str, wholecollection: bool = True) -> str:
     """
     Control the generation of the html code to display.
 
@@ -49,11 +51,22 @@ def pokemon_display(istagmon, wholecollection=True):
     return result
 
 
-def _show(data):
+def _show(
+    data: Union[
+        Union[
+            List[Union[Tuple[str, int, float, str], Tuple[str, int, float]]],
+            None,
+        ],
+        Union[
+            List[Union[Tuple[str, str, float, str], Tuple[str, str, float]]],
+            None,
+        ],
+    ]
+) -> str:
     """
     Generate the html to inject into the new stats window.
 
-    :param data: Pokémon information. Tuple if single Pokémon, list if collection.
+    :param List|None data: Pokémon information.
     :return: The html code to display.
     :rtype: str
     """
@@ -100,13 +113,19 @@ def _show(data):
     return txt
 
 
-def _card_html(name, source, level, nickname="", multi=False):
+def _card_html(
+    name: str,
+    source: Union[int, str],
+    level: float,
+    nickname: str = "",
+    multi: bool = False,
+) -> str:
     """
     Generate the html text for a Pokémon card.
 
     :param str name: Name of the Pokémon.
-    :param source: Id of the deck or name of the tag the Pokémon belongs to.
-    :param int level: The Pokémon's lvl.
+    :param int|str source: Id of the deck or name of the tag the Pokémon belongs to.
+    :param float level: The Pokémon's lvl.
     :param str nickname: Pokémon's nickname, if it has any.
     :param bool multi: True if multiple Pokémon are being rendered.
     :return: The card html.
@@ -177,11 +196,11 @@ def _card_html(name, source, level, nickname="", multi=False):
     return card
 
 
-def _get_source_name(item):
+def _get_source_name(item: Union[int, str]) -> str:
     """
     Get the name of the tag or deck based on the input item.
 
-    :param item: Element to find the source of
+    :param int item: Element to find the source of
     :return: The name of the deck
     """
 
@@ -191,13 +210,12 @@ def _get_source_name(item):
         return item
 
 
-def _in_list(listname, item):
+def _in_list(listname: str, item: str) -> bool:
     """
-    Check if an item is in a list. Mainly used to avoid copy/pasting code
-    to open the json files.
+    Check if an item is in a list.
 
     :param str listname: Name of the list to check in.
-    :param item: Item to find in the list
+    :param str item: Item to find in the list
     :return: True if the list exists and the item is in it, otherwise false.
     :rtype: bool
     """
@@ -208,12 +226,12 @@ def _in_list(listname, item):
     return item in get_synced_conf()[f"{listname}list"]
 
 
-def _image_name(name, source):
+def _image_name(name: str, source: Union[int, str]) -> str:
     """
     Get the image name based on the Pokémon's name and any special attributes.
 
     :param str name: Pokémon's name.
-    :param source: Id of the deck or tag name the Pokémon belongs to.
+    :param int|str source: Id of the deck or tag name the Pokémon belongs to.
     :return: The image name to be used to retrieve it.
     :rtype: str
     """
@@ -237,11 +255,11 @@ def _image_name(name, source):
     return fullname
 
 
-def _egg_hatch_text(level):
+def _egg_hatch_text(level: float) -> str:
     """
     Get the egg's hatch text.
 
-    :param int level: The level of the egg.
+    :param float level: The level of the egg.
     :return: The hatch text.
     :rtype: str
     """
@@ -255,22 +273,22 @@ def _egg_hatch_text(level):
         return "Making sounds inside"
 
 
-def _calculate_xp_progress(level):
+def _calculate_xp_progress(level: float) -> int:
     """
     Calculate the xp progress for the xp bar based on the given level.
 
-    :param int level: The level to base the calculations on.
+    :param float level: The level to base the calculations on.
     :return: The progress in the xp bar.
     :rtype: int
     """
     return int(float(20 * (float(level) - int(float(level)))))
 
 
-def _held_html(source):
+def _held_html(source: Union[int, str]) -> str:
     """
     Generate the held html code for the given Pokémon.
 
-    :param source: Id of the deck or tag name the Pokémon belongs to.
+    :param int|str source: Id of the deck or tag name the Pokémon belongs to.
     :return: The concatenation of all held items' html. Empty if it has no items.
     :rtype: str
     """
