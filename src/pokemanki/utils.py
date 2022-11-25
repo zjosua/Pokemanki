@@ -20,7 +20,7 @@ import json
 import shutil
 import distutils.dir_util
 from pathlib import Path
-from typing import List, Union
+from typing import Any, List, Tuple, Union
 
 from aqt import mw
 from aqt.qt import *
@@ -56,7 +56,7 @@ def set_default(file_name: str, default):
         write_json(file_name, default)
 
 
-def get_json(file_name: str, default=None):
+def get_json(file_name: str, default = None) -> Any:
     file_path = mediafolder / file_name
     value = None
     if file_path.exists():
@@ -67,13 +67,13 @@ def get_json(file_name: str, default=None):
     return value
 
 
-def write_json(file_name: str, value):
+def write_json(file_name: str, value: Any):
     file_path = mediafolder / file_name
     with open(file_path, "w") as f:
         json.dump(value, f)
 
 
-def no_pokemon():
+def no_pokemon() -> None:
     showInfo(
         "Please open the Stats window to get your Pokémon.",
         parent=mw,
@@ -81,7 +81,7 @@ def no_pokemon():
     )
 
 
-def get_pokemons():
+def get_pokemons() -> Tuple[List[str], str]:
     f = get_synced_conf()["decks_or_tags"]
     if f == "tags":
         pokemons = get_synced_conf()["tagmon_list"]
