@@ -16,12 +16,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Any
+from typing import Any, Dict
 
 from aqt import mw
 
 
-def init_config():
+def init_config() -> None:
     if not get_synced_conf():
 
         from .legacy import LegacyImporter
@@ -32,15 +32,15 @@ def init_config():
             setup_default_synced_conf()
 
 
-def get_local_conf() -> dict:
+def get_local_conf() -> Dict[str, Any]:
     return mw.addonManager.getConfig(__name__)
 
 
-def save_local_conf(config: str) -> None:
+def save_local_conf(config: Dict[str, Any]) -> None:
     mw.addonManager.writeConfig(__name__, config)
 
 
-def get_synced_conf() -> Any:
+def get_synced_conf() -> Dict[str, Any]:
     return mw.col.get_config("pokemanki", default=None)
 
 
