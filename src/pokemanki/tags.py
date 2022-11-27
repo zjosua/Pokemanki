@@ -252,4 +252,4 @@ class Tags:
                                         )
 
         save_synced_conf("tags", checked)
-        self.parentwindow.done(QDialog.Accepted)
+        self.parentwindow.done(QDialog.DialogCode.Accepted)
