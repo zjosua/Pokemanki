@@ -61,8 +61,13 @@ class Trades:
         if cmd == "Happy Easter, Exkywor":
             img_path = f"{addon_dir}/pokemon_images/Exkywor.png"
 
-            from PyQt6 import QtCore, QtWidgets
-            from aqt.qt import QDialog
+            from typing import TYPE_CHECKING
+            from aqt.qt import QDialog, qtmajor
+
+            if TYPE_CHECKING or qtmajor >= 6:
+                from PyQt6 import QtWidgets
+            else:
+                from PyQt5 import QtWidgets
 
             class Ui_Dialog(object):
                 def setupUi(self, Dialog: QDialog) -> None:

@@ -10,6 +10,7 @@
     "tags": "pokémon gamification",
     "conflicts": ["633922407"],
     "targets": [
+        "qt5",
         "qt6"
     ]
 }
