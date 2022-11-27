@@ -196,7 +196,9 @@ class Trades:
 
         return not (tradeData == [] or tradeData[1] == [])
 
-    def _make_trade(self, have: List[Union[str, int]], want: List[Union[str, int]]) -> None:
+    def _make_trade(
+        self, have: List[Union[str, int]], want: List[Union[str, int]]
+    ) -> None:
         """Make a trade.
 
         :param tuple have: Pokémon available to trade.
@@ -334,9 +336,7 @@ def get_pokemon_records() -> List[Tuple[Optional[str], str, int, int]]:
             csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen2_plus4.csv"
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
         else:
-            csv_fpath = (
-                addon_dir / "pokemon_evolutions" / "pokemon_gen1_plus2_no4.csv"
-            )
+            csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen1_plus2_no4.csv"
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
             csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen2_no4.csv"
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
@@ -349,9 +349,7 @@ def get_pokemon_records() -> List[Tuple[Optional[str], str, int, int]]:
             )
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
         else:
-            csv_fpath = (
-                addon_dir / "pokemon_evolutions" / "pokemon_gen1_no2_no4.csv"
-            )
+            csv_fpath = addon_dir / "pokemon_evolutions" / "pokemon_gen1_no2_no4.csv"
             pokemon_records.extend(pokemonLevelRangesFromCsv(csv_fpath))
 
     if get_local_conf()["gen3"]:
@@ -367,7 +365,9 @@ def get_pokemon_records() -> List[Tuple[Optional[str], str, int, int]]:
     return pokemon_records
 
 
-def pokemonLevelRangesFromCsv(csv_fpath: Union[str, bytes]) -> List[Tuple[Optional[str], str, int, int]]:
+def pokemonLevelRangesFromCsv(
+    csv_fpath: Union[str, bytes]
+) -> List[Tuple[Optional[str], str, int, int]]:
     """Get the list of evolution level ranges for all Pokémon.
 
     :param str csv_fpath: Path of the csv containing the evolution list

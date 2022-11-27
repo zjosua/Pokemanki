@@ -56,7 +56,7 @@ def set_default(file_name: str, default: Any) -> None:
         write_json(file_name, default)
 
 
-def get_json(file_name: str, default = None) -> Any:
+def get_json(file_name: str, default=None) -> Any:
     file_path = mediafolder / file_name
     value = None
     if file_path.exists():

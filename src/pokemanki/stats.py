@@ -76,7 +76,7 @@ def deckStats(deck_ids: List[int]) -> List[Tuple[int, int]]:
 
 def MultiStats(wholeCollection: bool) -> List[Tuple[int, List[Tuple[int, int]]]]:
     """Retrieve id and ivl for each subdeck that does not have subdecks itself
-    
+
     :param bool wholeCollection:
     :return: List of tuples with decks and their cards (deck_id, [(card_id, interval), ...])
     :rtype: List

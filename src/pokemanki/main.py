@@ -121,7 +121,9 @@ def build_menu() -> None:
 display_func = pokemon_display
 
 
-def message_handler(handled: Tuple[bool, Any], message: str, context: Any) -> Tuple[bool, Any]:
+def message_handler(
+    handled: Tuple[bool, Any], message: str, context: Any
+) -> Tuple[bool, Any]:
     # context is not set to NewDeckStats, so don't check for it
     # maybe Anki bug?
     if not message.startswith("Pokemanki#"):
@@ -152,7 +154,10 @@ def onStatsOpen(statsDialog: aqt.stats.NewDeckStats) -> None:
     statsDialog.form.web.loadFinished.connect(lambda _: _onStatsOpen(statsDialog))
 
 
-def replace_gears(deck_browser: aqt.deckbrowser.DeckBrowser, content: aqt.deckbrowser.DeckBrowserContent) -> None:
+def replace_gears(
+    deck_browser: aqt.deckbrowser.DeckBrowser,
+    content: aqt.deckbrowser.DeckBrowserContent,
+) -> None:
     conf = get_synced_conf()
     if not conf:
         return
