@@ -21,6 +21,8 @@ import inspect
 import random
 from datetime import date as dt
 
+from typing import List, Optional, Tuple, Union
+
 from .config import get_local_conf, get_synced_conf, save_synced_conf
 from .utils import *
 
@@ -30,7 +32,7 @@ from .gui.pokemanki_trade import *
 class Trades:
     _trade_window = None
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.dirname = os.path.dirname(
             os.path.abspath(inspect.getfile(inspect.currentframe()))
         )
@@ -39,7 +41,7 @@ class Trades:
         self.f = get_synced_conf()["decks_or_tags"]
         self._trade_window = TradeWindow(self, mw)
 
-    def open(self):
+    def open(self) -> None:
         """Open the Trade window"""
 
         updated_trades = self._update_trades()
@@ -52,20 +54,18 @@ class Trades:
             return
         self._trade_window.open_trades(self.trades)
 
-    def on_bridge_cmd(self, cmd):
+    def on_bridge_cmd(self, cmd: str) -> Optional[int]:
         if cmd in ["0", "1", "2"]:
             self._make_trade(self.trades[int(cmd)][0], self.trades[int(cmd)][1])
 
         if cmd == "Happy Easter, Exkywor":
-            import os
-
             img_path = f"{addon_dir}/pokemon_images/Exkywor.png"
 
             from PyQt6 import QtCore, QtWidgets
             from aqt.qt import QDialog
 
             class Ui_Dialog(object):
-                def setupUi(self, Dialog):
+                def setupUi(self, Dialog: QDialog) -> None:
                     Dialog.setObjectName("Dialog")
                     Dialog.setWindowTitle(cmd)
                     Dialog.resize(386, 332)
@@ -77,7 +77,7 @@ class Trades:
                     self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
 
             class EggDialog(QDialog):
-                def __init__(self, parent):
+                def __init__(self, parent: QDialog) -> None:
                     super(EggDialog, self).__init__(parent=parent)
                     self.dialog = Ui_Dialog()
                     self.dialog.setupUi(self)
@@ -85,7 +85,7 @@ class Trades:
             egg = EggDialog(self._trade_window)
             return egg.exec()
 
-    def _get_new_trades(self):
+    def _get_new_trades(self) -> None:
         """Get new trades."""
 
         self.trades = []
@@ -172,7 +172,7 @@ class Trades:
         testData = [date, self.trades, possiblehaveslist]
         save_synced_conf("trades", tradeData)
 
-    def _update_trades(self):
+    def _update_trades(self) -> bool:
         """Update the trades if the date or mode have changed."""
 
         f = self.f
@@ -196,7 +196,7 @@ class Trades:
 
         return not (tradeData == [] or tradeData[1] == [])
 
-    def _make_trade(self, have, want):
+    def _make_trade(self, have: List[Union[str, int]], want: List[Union[str, int]]) -> None:
         """Make a trade.
 
         :param tuple have: Pokémon available to trade.
@@ -312,7 +312,7 @@ class Trades:
             )
 
 
-def get_pokemon_records():
+def get_pokemon_records() -> List[Tuple[Optional[str], str, int, int]]:
     """Generate a list of all Pokémon based on the user's generation configuration.
 
     :return: List of pokemon records.
@@ -367,7 +367,7 @@ def get_pokemon_records():
     return pokemon_records
 
 
-def pokemonLevelRangesFromCsv(csv_fpath):
+def pokemonLevelRangesFromCsv(csv_fpath: Union[str, bytes]) -> List[Tuple[Optional[str], str, int, int]]:
     """Get the list of evolution level ranges for all Pokémon.
 
     :param str csv_fpath: Path of the csv containing the evolution list

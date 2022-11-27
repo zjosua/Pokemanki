@@ -24,11 +24,11 @@ from .utils import *
 
 
 class Tags:
-    def __init__(self):
+    def __init__(self) -> None:
         self.parentwindow = QDialog()
         self.alltags = []
 
-    def tagMenu(self):
+    def tagMenu(self) -> None:
         self.savedtags = get_synced_conf()["tags"]
         rawtags = mw.col.tags.all()
         alltags = self.alltags
@@ -219,7 +219,7 @@ class Tags:
         btn.clicked.connect(self.tagAssign)
         parentwindow.exec()
 
-    def tagAssign(self):
+    def tagAssign(self) -> None:
         checked = self.checked = []
         for item in self.parentlist:
             if item[0].checkState(0) == Qt.CheckState.Checked:

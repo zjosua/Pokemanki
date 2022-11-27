@@ -38,7 +38,7 @@ cssfolder = f"/_addons/{addon_package}/pokemanki_css"
 mediafolder = Path(mw.col.media.dir())
 
 
-def copy_directory(dir_addon: str, dir_anki: str = None):
+def copy_directory(dir_addon: str, dir_anki: str = None) -> None:
     if not dir_anki:
         dir_anki = dir_addon
     fromdir = addon_dir / dir_addon
@@ -51,7 +51,7 @@ def copy_directory(dir_addon: str, dir_anki: str = None):
         distutils.dir_util.copy_tree(str(fromdir), str(todir))
 
 
-def set_default(file_name: str, default):
+def set_default(file_name: str, default: Any) -> None:
     if not get_json(file_name, None):
         write_json(file_name, default)
 
@@ -67,7 +67,7 @@ def get_json(file_name: str, default = None) -> Any:
     return value
 
 
-def write_json(file_name: str, value: Any):
+def write_json(file_name: str, value: Any) -> None:
     file_path = mediafolder / file_name
     with open(file_path, "w") as f:
         json.dump(value, f)
