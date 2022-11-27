@@ -22,6 +22,7 @@ from typing import Any, Tuple
 import aqt
 from aqt import mw, gui_hooks
 from aqt.qt import *
+from aqt.utils import askUser
 
 from .config import get_synced_conf, init_config
 from .display import pokemon_display
@@ -175,11 +176,28 @@ def replace_gears(
     content.tree = soup
 
 
+def remove_config(dialog: aqt.addons.AddonsDialog, addons: List[str]) -> None:
+    for name in ["1041307953", "pokemanki"]:
+        if name in addons:
+            delete_pokemanki_conf = askUser(
+                """\
+The Pokémanki add-on will be deleted.
+Do you want to remove its config too?
+This will delete your Pokémon.
+""",
+                parent=dialog,
+                title="Remove Pokémanki config?",
+            )
+            if delete_pokemanki_conf:
+                mw.col.remove_config("pokemanki")
+
+
 def pokemanki_init() -> None:
     init_config()
     mw.pokemenu = QMenu("&Pokémanki", mw)
     build_menu()
     gui_hooks.deck_browser_will_render_content.append(replace_gears)
+    gui_hooks.addons_dialog_will_delete_addons.append(remove_config)
 
 
 def delayed_init() -> None:
