@@ -16,19 +16,23 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from typing import List, Tuple
+
+import anki
+
 from aqt import mw
 from anki.utils import ids2str
 
 from .utils import *
 
 
-def cardIdsFromDeckIds(queryDb, deckIds):
+def cardIdsFromDeckIds(queryDb: anki.dbproxy.DBProxy, deckIds: List[int]) -> List[int]:
     query = f"select id from cards where did in {ids2str(deckIds)}"
     cardIds = [i[0] for i in queryDb.all(query)]
     return cardIds
 
 
-def cardInterval(queryDb, cid):
+def cardInterval(queryDb: anki.dbproxy.DBProxy, cid: int):
     revLogIvl = queryDb.scalar(
         "select ivl from revlog where cid = %s "
         "order by id desc limit 1 offset 0" % cid
@@ -53,10 +57,10 @@ def cardInterval(queryDb, cid):
     return ivl
 
 
-def deckStats(deck_ids):
+def deckStats(deck_ids: List[int]) -> List[Tuple[int, int]]:
     """
     deck_ids: list
-    returns [[card_id, card_interval], ...]
+    returns [(card_id, card_interval), ...]
     """
     cardIds = cardIdsFromDeckIds(mw.col.db, deck_ids)
 
@@ -70,11 +74,11 @@ def deckStats(deck_ids):
     return result
 
 
-def MultiStats(wholeCollection):
+def MultiStats(wholeCollection: bool) -> List[Tuple[int, List[Tuple[int, int]]]]:
     """Retrieve id and ivl for each subdeck that does not have subdecks itself
     
     :param bool wholeCollection:
-    :return: List of tuples with decks and their cards (deck_id, [[card_id, interval], ...])
+    :return: List of tuples with decks and their cards (deck_id, [(card_id, interval), ...])
     :rtype: List
     """
     # Get list of subdecks
@@ -109,8 +113,8 @@ def MultiStats(wholeCollection):
     return nograndchildresults
 
 
-def TagStats():
-    "Returns List[[tag_name, card_id, card_interval], ...]"
+def TagStats() -> List[Tuple[str, List[List[int]]]]:
+    "Returns List[(tag_name, [[card_id, card_interval], ...]), ...]"
     savedtags = get_synced_conf()["tags"]
     resultlist = []
     for item in savedtags:

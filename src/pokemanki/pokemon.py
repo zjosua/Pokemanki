@@ -29,7 +29,7 @@ from .utils import *
 
 
 # Nickname Settings
-def nickname():
+def nickname() -> None:
     deckmonlist, f = get_pokemons()
     if deckmonlist is None:
         return
@@ -126,7 +126,7 @@ def nickname():
         save_synced_conf("pokemon_list", modifieddeckmonlist)
 
 
-def Toggle():
+def Toggle() -> None:
     window = QWidget()
     items = ("Decks (Default)", "Tags")
     by = get_synced_conf()["decks_or_tags"]
@@ -157,7 +157,7 @@ def Toggle():
 # Threshold Settings
 
 
-def ThresholdSettings():
+def ThresholdSettings() -> None:
     global thresholdlist
     # Find recommended number of cards for starter Pokemon threshold (based on deck with highest number of cards).
     decklist = mw.col.decks.allIds()
@@ -205,7 +205,7 @@ def ThresholdSettings():
     window.show()
 
 
-def reset_pokemanki():
+def reset_pokemanki() -> None:
     # Make message box
     resetwindow = QMessageBox()
     resetwindow.setWindowTitle("Pokémanki")
@@ -229,7 +229,7 @@ def reset_pokemanki():
         showInfo("Pokémanki config reset", parent=mw, title="Pokémanki")
 
 
-def MovetoBottom():
+def MovetoBottom() -> None:
     showInfo(
         "Please restart Anki to see your updated settings.",
         parent=mw,
@@ -237,7 +237,7 @@ def MovetoBottom():
     )
 
 
-def MovetoTop():
+def MovetoTop() -> None:
     showInfo(
         "Please restart Anki to see your updated settings.",
         parent=mw,
@@ -245,7 +245,7 @@ def MovetoTop():
     )
 
 
-def giveEverstone():
+def giveEverstone() -> None:
     pokemon, f = get_pokemons()
     if pokemon is None:
         return
@@ -291,7 +291,7 @@ def giveEverstone():
     save_synced_conf("everstonepokemonlist", everstonepokemonlist)
 
 
-def takeEverstone():
+def takeEverstone() -> None:
     pokemon, f = get_pokemons()
     if pokemon is None:
         return
@@ -340,7 +340,7 @@ def takeEverstone():
     save_synced_conf("everstonelist", everstonelist)
 
 
-def giveMegastone():
+def giveMegastone() -> None:
     pokemon, f = get_pokemons()
     if pokemon is None:
         return
@@ -385,7 +385,7 @@ def giveMegastone():
     save_synced_conf("megastonelist", megastonelist)
 
 
-def takeMegastone():
+def takeMegastone() -> None:
     pokemon, f = get_pokemons()
     if pokemon is None:
         return
@@ -433,7 +433,7 @@ def takeMegastone():
     save_synced_conf("megastonelist", megastonelist)
 
 
-def giveAlolanPassport():
+def giveAlolanPassport() -> None:
     pokemon, f = get_pokemons()
     if pokemon is None:
         return
@@ -476,7 +476,7 @@ def giveAlolanPassport():
     save_synced_conf("alolanlist", alolanlist)
 
 
-def takeAlolanPassport():
+def takeAlolanPassport() -> None:
     pokemon, f = get_pokemons()
     if pokemon is None:
         return
@@ -524,7 +524,7 @@ def takeAlolanPassport():
     save_synced_conf("alolanlist", alolanlist)
 
 
-def PrestigePokemon():
+def PrestigePokemon() -> None:
     pokemon, f = get_pokemons()
     if pokemon is None:
         return
@@ -571,7 +571,7 @@ def PrestigePokemon():
     save_synced_conf("prestigelist", prestigelist)
 
 
-def UnprestigePokemon():
+def UnprestigePokemon() -> None:
     pokemon, f = get_pokemons()
     if pokemon is None:
         return
