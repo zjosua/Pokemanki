@@ -16,10 +16,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import os
-import sys
 from bs4 import BeautifulSoup
+from typing import Any, Tuple
 
+import aqt
 from aqt import mw, gui_hooks
 from aqt.qt import *
 
@@ -29,7 +29,7 @@ from .gui.pokemanki_options import invoke_pokemanki_options
 from .pokemon import *
 from .tags import Tags
 from .trades import Trades
-from .utils import copy_directory, cssfolder, pkmnimgfolder
+from .utils import pkmnimgfolder
 
 
 statsDialog = None
@@ -43,7 +43,7 @@ mw.addonManager.setWebExports(
 )
 
 
-def build_menu():
+def build_menu() -> None:
     global tradeclass
 
     # Make actions for settings and reset
@@ -121,7 +121,7 @@ def build_menu():
 display_func = pokemon_display
 
 
-def message_handler(handled, message, context):
+def message_handler(handled: Tuple[bool, Any], message: str, context: Any) -> Tuple[bool, Any]:
     # context is not set to NewDeckStats, so don't check for it
     # maybe Anki bug?
     if not message.startswith("Pokemanki#"):
@@ -140,19 +140,19 @@ def message_handler(handled, message, context):
     return (True, None)
 
 
-def _onStatsOpen(dialog):
+def _onStatsOpen(dialog: aqt.stats.NewDeckStats) -> None:
     global statsDialog
     statsDialog = dialog
     js = (addon_dir / "web.js").read_text(encoding="utf-8")
     statsDialog.form.web.eval(js)
 
 
-def onStatsOpen(statsDialog):
+def onStatsOpen(statsDialog: aqt.stats.NewDeckStats) -> None:
 
     statsDialog.form.web.loadFinished.connect(lambda _: _onStatsOpen(statsDialog))
 
 
-def replace_gears(deck_browser, content):
+def replace_gears(deck_browser: aqt.deckbrowser.DeckBrowser, content: aqt.deckbrowser.DeckBrowserContent) -> None:
     conf = get_synced_conf()
     if not conf:
         return
@@ -170,14 +170,14 @@ def replace_gears(deck_browser, content):
     content.tree = soup
 
 
-def pokemanki_init():
+def pokemanki_init() -> None:
     init_config()
     mw.pokemenu = QMenu("&Pokémanki", mw)
     build_menu()
     gui_hooks.deck_browser_will_render_content.append(replace_gears)
 
 
-def delayed_init():
+def delayed_init() -> None:
     mw.progress.single_shot(50, pokemanki_init)
 
 
