@@ -4,7 +4,7 @@ Keep motivated to do Anki by catching and training Pokémon to become the very b
 
 ## Compatibility
 
-This add-on requires the Qt6 build of Anki version 2.1.50 or later.
+This add-on requires Anki version 2.1.50 or later.
 
 ## How it works
 
