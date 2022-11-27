@@ -24,8 +24,9 @@ from typing import List, Tuple, Union
 
 from aqt import mw
 
-from .utils import *
 from .compute import MultiPokemon, TagPokemon
+from .config import get_local_conf
+from .utils import *
 
 
 def pokemon_display(istagmon: str, wholecollection: bool = True) -> str:
@@ -247,7 +248,7 @@ def _image_name(name: str, source: Union[int, str]) -> str:
         if any([name + "_Mega" in imgname for imgname in os.listdir(pkmnimgfolder)]):
             fullname += "_Mega"
             if name == "Charizard" or name == "Mewtwo":
-                fullname += config["X_or_Y_mega_evolutions"]
+                fullname += get_local_conf()["X_or_Y_mega_evolutions"]
     if _in_list("alolan", source):
         if any([name + "_Alolan" in imgname for imgname in os.listdir(pkmnimgfolder)]):
             fullname += "_Alolan"
