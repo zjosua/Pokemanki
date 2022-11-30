@@ -21,6 +21,7 @@ from typing import Any, Tuple
 
 import aqt
 from aqt import mw, gui_hooks
+from aqt.operations import QueryOp
 from aqt.qt import *
 from aqt.utils import askUser
 
@@ -33,6 +34,7 @@ from .trades import Trades
 from .utils import pkmnimgfolder
 
 
+# global definition of statsDialog for hooks and async callback function
 statsDialog = None
 
 tradeclass = object()
@@ -122,24 +124,36 @@ def build_menu() -> None:
 display_func = pokemon_display
 
 
+def on_compute_completed(html: str) -> None:
+    html = html.replace("`", "'")
+    statsDialog.form.web.eval(f"Pokemanki.setPokemanki(`{html}`)")
+
+
 def message_handler(
     handled: Tuple[bool, Any], message: str, context: Any
 ) -> Tuple[bool, Any]:
-    # context is not set to NewDeckStats, so don't check for it
-    # maybe Anki bug?
+    # https://github.com/ankitects/anki/blob/main/qt/tools/genhooks_gui.py#L618
+    if not type(context) == aqt.stats.NewDeckStats:
+        return (False, None)
     if not message.startswith("Pokemanki#"):
         return (False, None)
     f = get_synced_conf()["decks_or_tags"]
     if message == "Pokemanki#currentDeck":
-        html = pokemon_display(f, False).replace("`", "'")
+        whole_collection = False
     elif message == "Pokemanki#wholeCollection":
-        html = pokemon_display(f, True).replace("`", "'")
+        whole_collection = True
     else:
         starts = "Pokemanki#search#"
         term = message[len(starts) :]
         # Todo: implement selective
         return (True, None)
-    statsDialog.form.web.eval(f"Pokemanki.setPokemanki(`{html}`)")
+    # https://addon-docs.ankiweb.net/background-ops.html
+    op = QueryOp(
+        parent=statsDialog,
+        op=lambda x: pokemon_display(f, whole_collection),
+        success=on_compute_completed,
+    )
+    op.run_in_background()
     return (True, None)
 
 

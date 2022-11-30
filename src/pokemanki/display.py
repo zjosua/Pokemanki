@@ -29,11 +29,11 @@ from .config import get_local_conf
 from .utils import *
 
 
-def pokemon_display(istagmon: str, wholecollection: bool = True) -> str:
+def pokemon_display(decks_or_tags: str, wholecollection: bool = True) -> str:
     """
     Control the generation of the html code to display.
 
-    :param bool istagmon: True to switch to use tag's displau, False for deck.
+    :param str decks_or_tags: Whether Pokémon are assigned by decks or by tags.
     :param bool wholecollection: True if multiple Pokémon, false if single.
     :return: The html text to display.
     :rtype: str
@@ -42,7 +42,7 @@ def pokemon_display(istagmon: str, wholecollection: bool = True) -> str:
     # Get list of Pokémon from tags or decks.
     #   For decks, if wholeCollection, get all assigned Pokémon and assign to Pokémon,
     #   else, show Pokémon for either single deck or all subdecks and store in Pokémon
-    if istagmon == "tags":
+    if decks_or_tags == "tags":
         pokemon = TagPokemon()
     else:
         pokemon = MultiPokemon(wholecollection)
