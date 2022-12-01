@@ -33,6 +33,7 @@ from .trades import Trades
 from .utils import pkmnimgfolder
 
 
+# global definition of statsDialog for hooks and async callback function
 statsDialog = None
 
 tradeclass = object()
@@ -125,8 +126,9 @@ display_func = pokemon_display
 def message_handler(
     handled: Tuple[bool, Any], message: str, context: Any
 ) -> Tuple[bool, Any]:
-    # context is not set to NewDeckStats, so don't check for it
-    # maybe Anki bug?
+    # https://github.com/ankitects/anki/blob/main/qt/tools/genhooks_gui.py#L618
+    if not type(context) == aqt.stats.NewDeckStats:
+        return (False, None)
     if not message.startswith("Pokemanki#"):
         return (False, None)
     f = get_synced_conf()["decks_or_tags"]

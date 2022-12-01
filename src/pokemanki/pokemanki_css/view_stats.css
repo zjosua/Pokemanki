@@ -1,6 +1,8 @@
 .pk-st-container {
     display: flex;
     gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
     padding: 10px;
     margin: 10px 0px;
     overflow-x: auto;
