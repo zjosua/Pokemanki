@@ -21,7 +21,6 @@ from typing import Any, Tuple
 
 import aqt
 from aqt import mw, gui_hooks
-from aqt.operations import QueryOp
 from aqt.qt import *
 from aqt.utils import askUser
 
@@ -124,11 +123,6 @@ def build_menu() -> None:
 display_func = pokemon_display
 
 
-def on_compute_completed(html: str) -> None:
-    html = html.replace("`", "'")
-    statsDialog.form.web.eval(f"Pokemanki.setPokemanki(`{html}`)")
-
-
 def message_handler(
     handled: Tuple[bool, Any], message: str, context: Any
 ) -> Tuple[bool, Any]:
@@ -139,21 +133,15 @@ def message_handler(
         return (False, None)
     f = get_synced_conf()["decks_or_tags"]
     if message == "Pokemanki#currentDeck":
-        whole_collection = False
+        html = pokemon_display(f, False).replace("`", "'")
     elif message == "Pokemanki#wholeCollection":
-        whole_collection = True
+        html = pokemon_display(f, True).replace("`", "'")
     else:
         starts = "Pokemanki#search#"
         term = message[len(starts) :]
         # Todo: implement selective
         return (True, None)
-    # https://addon-docs.ankiweb.net/background-ops.html
-    op = QueryOp(
-        parent=statsDialog,
-        op=lambda x: pokemon_display(f, whole_collection),
-        success=on_compute_completed,
-    )
-    op.run_in_background()
+    statsDialog.form.web.eval(f"Pokemanki.setPokemanki(`{html}`)")
     return (True, None)
 
 
