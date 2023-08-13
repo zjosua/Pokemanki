@@ -128,9 +128,9 @@ def message_handler(
 ) -> Tuple[bool, Any]:
     # https://github.com/ankitects/anki/blob/main/qt/tools/genhooks_gui.py#L618
     if not type(context) == aqt.stats.NewDeckStats:
-        return (False, None)
+        return handled
     if not message.startswith("Pokemanki#"):
-        return (False, None)
+        return handled
     f = get_synced_conf()["decks_or_tags"]
     if message == "Pokemanki#currentDeck":
         html = pokemon_display(f, False).replace("`", "'")
