@@ -539,9 +539,9 @@ def MultiPokemon(
     return multiData
 
 
-def TagPokemon() -> Union[
-    List[Union[Tuple[str, str, float, str], Tuple[str, str, float]]], None
-]:
+def TagPokemon() -> (
+    Union[List[Union[Tuple[str, str, float, str], Tuple[str, str, float]]], None]
+):
     """
     Generate an array of TagPokemon
 

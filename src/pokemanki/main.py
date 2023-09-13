@@ -153,7 +153,6 @@ def _onStatsOpen(dialog: aqt.stats.NewDeckStats) -> None:
 
 
 def onStatsOpen(statsDialog: aqt.stats.NewDeckStats) -> None:
-
     statsDialog.form.web.loadFinished.connect(lambda _: _onStatsOpen(statsDialog))
 
 

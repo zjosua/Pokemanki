@@ -23,7 +23,6 @@ from aqt import mw
 
 def init_config() -> None:
     if not get_synced_conf():
-
         from .legacy import LegacyImporter
 
         importer = LegacyImporter()
