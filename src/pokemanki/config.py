@@ -71,5 +71,8 @@ def setup_default_synced_conf() -> None:
         "tagmon_list": [],
         "tags": [],
         "trades": [],
+        "settings_scope": "global",
+        "global_startdate": 1160006400,
+        "global_xp_modifier": 1,
     }
     mw.col.set_config("pokemanki", default)

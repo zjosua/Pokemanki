@@ -47,6 +47,7 @@ from __future__ import (
 from aqt import mw
 from aqt.qt import *
 
+from ..config import get_synced_conf, save_synced_conf
 from ..libaddon.gui.content.about import getAboutString
 
 from .forms import pokemanki_options
@@ -65,15 +66,39 @@ class PokemankiOptions(QDialog):
     def setup_ui(self):
         self.f.buttonBox.accepted.connect(self.on_accept)
         self.f.buttonBox.rejected.connect(self.on_reject)
+        self.f.buttonBox.button(QDialogButtonBox.StandardButton.Apply).clicked.connect(
+            self.save_config
+        )
 
         about_string = getAboutString(title=True)
         self.f.htmlAbout.setHtml(about_string)
 
+        conf = get_synced_conf()
+        global_startdate = QDateTime.fromMSecsSinceEpoch(conf["global_startdate"])
+        xp_modifier_global = conf["xp_modifier_global"]
+        self.f.dte_startdate_global.setDateTime(global_startdate)
+        self.f.dsb_xp_modifier_global.setValue(xp_modifier_global)
+
     def on_accept(self):
+        self.save_config()
         self.close()
 
     def on_reject(self):
         self.close()
+
+    def save_config(self):
+        if self.f.rb_global.isChecked():
+            settings_scope = "global"
+            global_startdate = (
+                self.f.dte_startdate_global.dateTime().toMSecsSinceEpoch()
+            )
+            xp_modifier_global = self.f.dsb_xp_modifier_global.value()
+            save_synced_conf("global_startdate", global_startdate)
+            save_synced_conf("xp_modifier_global", xp_modifier_global)
+        elif self.f.rb_individual.isChecked():
+            settings_scope = "individual"
+
+        save_synced_conf("settings_scope", settings_scope)
 
 
 def invoke_pokemanki_options():

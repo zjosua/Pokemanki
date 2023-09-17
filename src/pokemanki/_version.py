@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 # Pokémanki
-# Copyright (C) 2022 Exkywor and zjosua
+# Copyright (C) 2023 Exkywor and zjosua
 #
 # This file is based on _version.py from
 # Cloze Overlapper Add-on for Anki
@@ -37,4 +37,4 @@
 Version information
 """
 
-__version__ = "1.3.4"
+__version__ = "1.4.0"

@@ -23,6 +23,7 @@ import anki
 from aqt import mw
 from anki.utils import ids2str
 
+from .config import get_synced_conf
 from .utils import *
 
 
@@ -32,14 +33,13 @@ def cardIdsFromDeckIds(queryDb: anki.dbproxy.DBProxy, deckIds: List[int]) -> Lis
     return cardIds
 
 
-def cardInterval(queryDb: anki.dbproxy.DBProxy, cid: int):
+def cardInterval(queryDb: anki.dbproxy.DBProxy, cid: int, startdate: int) -> int:
     revLogIvl = queryDb.scalar(
-        "select ivl from revlog where cid = %s "
-        "order by id desc limit 1 offset 0" % cid
+        f"SELECT ivl FROM revlog WHERE id >= {startdate} AND cid = {cid} "
+        "ORDER BY id DESC LIMIT 1 OFFSET 0"
     )
     ctype = queryDb.scalar(
-        "select type from cards where id = %s "
-        "order by id desc limit 1 offset 0" % cid
+        f"SELECT type FROM cards WHERE id = {cid} ORDER BY id DESC LIMIT 1 OFFSET 0"
     )
 
     # card interval is "New"
@@ -66,9 +66,10 @@ def deckStats(deck_ids: List[int]) -> List[Tuple[int, int]]:
 
     # result = self.col.db.all("""select id, ivl from cards where did in %s""" %
     #             ids2str(self.col.decks.active()))
+    global_startdate = get_synced_conf()["global_startdate"]
     result = []
     for cid in cardIds:
-        ivl = cardInterval(mw.col.db, cid)
+        ivl = cardInterval(mw.col.db, cid, global_startdate)
         result.append((cid, ivl))
 
     return result

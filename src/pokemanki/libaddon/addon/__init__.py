@@ -63,7 +63,7 @@ class AddonData(NamedTuple):
         },
         {
             "name": "zjosua",
-            "years": "2022",
+            "years": "2022 - 2023",
             "contact": "https://github.com/zjosua",
         },
     )

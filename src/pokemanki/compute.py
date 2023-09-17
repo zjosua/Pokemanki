@@ -247,10 +247,11 @@ def FirstPokemon() -> None:
             # stats = mw.col.db.all("""select id, ivl from cards where did in (%s)""" % deck)
 
             # cardIds = mw.col.db.all("""select id from cards where did in (%s)""" % deck)
+            global_startdate = get_synced_conf()["global_startdate"]
             cardIds = cardIdsFromDeckIds(mw.col.db, [deck])
             stats = []
             for cid in cardIds:
-                ivl = cardInterval(mw.col.db, cid)
+                ivl = cardInterval(mw.col.db, cid, global_startdate)
                 stats.append((cid, ivl))
 
             sumivl = 0
