@@ -80,7 +80,7 @@ class PokemankiOptions(QDialog):
         )
         xp_modifier_global = conf.get("xp_modifier_global", 1)
         if settings_scope == "global":
-            self.rb_global.setChecked(True)
+            self.f.rb_global.setChecked(True)
         self.f.dte_startdate_global.setDateTime(global_startdate)
         self.f.dsb_xp_modifier_global.setValue(xp_modifier_global)
 
