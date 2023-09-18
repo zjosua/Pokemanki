@@ -19,8 +19,8 @@ jobs:
           TAG_VERSION: echo "${{ github.ref_name }}" | sed 's/v\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)/\1/'
         run: |
           if [ "$TAG_VERSION" = "$CODE_VERSION" ]; then
-            echo "Version valid and matching" | tee -a $GITHUB_STEP_SUMMARY
+            echo "Version $TAG_VERSION valid and matching in tag and code" | tee -a $GITHUB_STEP_SUMMARY
           else
-            echo "Version invalid or mismatched in tag and code" | tee -a $GITHUB_STEP_SUMMARY
+            echo "Version invalid or mismatched in tag ($TAG_VERSION) and code ($CODE_VERSION)" | tee -a $GITHUB_STEP_SUMMARY
             exit 1
           fi
