@@ -14,9 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Compare tag with code version
+        env:
+          CODE_VERSION: tail -n 1 "./src/pokemanki/_version.py" | sed 's/__version__ = "\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)"/\1/'
+          TAG_VERSION: echo "${{ github.ref_name }}" | sed 's/v\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)/\1/'
         run: |
-          tail -n 1 "./src/pokemanki/_version.py" | sed 's/__version__ = "\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)"/\1/' > $CODE_VERSION
-          echo "${{ github.ref_name }}" | sed 's/v\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)/\1/' > $TAG_VERSION
           if [ "$TAG_VERSION" = "$CODE_VERSION" ]; then
             echo "Version valid and matching" | tee -a $GITHUB_STEP_SUMMARY
           else
