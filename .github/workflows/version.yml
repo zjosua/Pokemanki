@@ -13,10 +13,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Set environment variables
+        run: |
+          echo "CODE_VERSION=$(tail -n 1 "./src/pokemanki/_version.py" | sed 's/__version__ = "\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)"/\1/')" >> $GITHUB_ENV
+          echo "TAG_VERSION=$(echo "${{ github.ref_name }}" | sed 's/v\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)/\1/')" >> $GITHUB_ENV
       - name: Compare tag with code version
-        env:
-          CODE_VERSION: tail -n 1 "./src/pokemanki/_version.py" | sed 's/__version__ = "\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)"/\1/'
-          TAG_VERSION: echo "${{ github.ref_name }}" | sed 's/v\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)/\1/'
         run: |
           if [ "$TAG_VERSION" = "$CODE_VERSION" ]; then
             echo "Version $TAG_VERSION valid and matching in tag and code" | tee -a $GITHUB_STEP_SUMMARY
