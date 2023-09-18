@@ -4,8 +4,6 @@ run-name: Check ${{ github.event_name }} by @${{ github.actor }}
 on:
   pull_request:
   push:
-    tags-ignore:
-      - '*'
 
 jobs:
   lint:

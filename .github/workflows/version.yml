@@ -13,14 +13,9 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Read _version.py
-        id: code-version
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: "./src/pokemanki/_version.py"
       - name: Compare tag with code version
         run: |
-          echo "${{ steps.code-version.outputs.content }}" | grep __version__ | sed 's/__version__ = "\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)"/\1/' > $CODE_VERSION
+          tail -n 1 "./src/pokemanki/_version.py" | sed 's/__version__ = "\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)"/\1/' > $CODE_VERSION
           echo "${{ github.ref_name }}" | sed 's/v\([[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\)/\1/' > $TAG_VERSION
           if [ "$TAG_VERSION" = "$CODE_VERSION" ]; then
             echo "Version valid and matching" | tee -a $GITHUB_STEP_SUMMARY
