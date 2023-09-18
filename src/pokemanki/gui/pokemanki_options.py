@@ -74,8 +74,13 @@ class PokemankiOptions(QDialog):
         self.f.htmlAbout.setHtml(about_string)
 
         conf = get_synced_conf()
-        global_startdate = QDateTime.fromMSecsSinceEpoch(conf["global_startdate"])
-        xp_modifier_global = conf["xp_modifier_global"]
+        settings_scope = conf.get("settings_scope", "global")
+        global_startdate = QDateTime.fromMSecsSinceEpoch(
+            conf.get("global_startdate", 1160006400000)
+        )
+        xp_modifier_global = conf.get("xp_modifier_global", 1)
+        if settings_scope == "global":
+            self.rb_global.setChecked(True)
         self.f.dte_startdate_global.setDateTime(global_startdate)
         self.f.dsb_xp_modifier_global.setValue(xp_modifier_global)
 
