@@ -66,7 +66,7 @@ def deckStats(deck_ids: List[int]) -> List[Tuple[int, int]]:
 
     # result = self.col.db.all("""select id, ivl from cards where did in %s""" %
     #             ids2str(self.col.decks.active()))
-    global_startdate = get_synced_conf()["global_startdate"]
+    global_startdate = get_synced_conf().get("global_startdate", 1160006400000)
     result = []
     for cid in cardIds:
         ivl = cardInterval(mw.col.db, cid, global_startdate)
