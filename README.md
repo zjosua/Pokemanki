@@ -38,6 +38,7 @@ From Anki's Tools menu you can access Pokémanki's menu, which has the following
 - **Alolan Passport:** Change a Pokémon to their Alolan variant.
 - **Trade:** Open the Trade window to exchange your Pokémon.
 - **Reset:** Reset your Pokémon and all of the add-on's configuration.
+- **Settings:** Change the add-on's configuration.
 
 ### Config menu
 
