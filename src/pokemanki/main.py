@@ -16,13 +16,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from bs4 import BeautifulSoup
 from typing import Any, Tuple
 
 import aqt
-from aqt import mw, gui_hooks
+from aqt import gui_hooks, mw
 from aqt.qt import *
 from aqt.utils import askUser
+from bs4 import BeautifulSoup
 
 from .config import get_synced_conf, init_config
 from .display import pokemon_display
@@ -31,7 +31,6 @@ from .pokemon import *
 from .tags import Tags
 from .trades import Trades
 from .utils import pkmnimgfolder
-
 
 # global definition of statsDialog for hooks and async callback function
 statsDialog = None

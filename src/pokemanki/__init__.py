@@ -19,7 +19,6 @@
 from aqt import gui_hooks
 from aqt.utils import showWarning
 
-
 opened = False
 
 

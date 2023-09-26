@@ -37,19 +37,13 @@
 Config dialog
 """
 
-from __future__ import (
-    absolute_import,
-    division,
-    print_function,
-    unicode_literals,
-)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from aqt import mw
 from aqt.qt import *
 
 from ..config import get_synced_conf, save_synced_conf
 from ..libaddon.gui.content.about import getAboutString
-
 from .forms import pokemanki_options
 
 

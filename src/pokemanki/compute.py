@@ -18,7 +18,6 @@
 
 import csv
 import random
-
 from typing import List, Tuple, Union
 
 from aqt import mw
@@ -26,8 +25,8 @@ from aqt.qt import *
 from aqt.utils import showInfo
 
 from .config import get_local_conf, get_synced_conf, save_synced_conf
+from .stats import MultiStats, TagStats, cardIdsFromDeckIds, cardInterval
 from .utils import *
-from .stats import MultiStats, TagStats, cardInterval, cardIdsFromDeckIds
 
 
 def loadPokemonGenerations(

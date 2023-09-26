@@ -18,7 +18,6 @@
 
 import ctypes
 import platform
-
 from typing import TYPE_CHECKING
 
 from aqt.qt import QDialog, qtmajor
@@ -30,7 +29,6 @@ else:
     from PyQt5 import QtWidgets
 
 from ..utils import cssfolder, pkmnimgfolder
-
 from .forms import pokemanki_trade
 
 

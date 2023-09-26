@@ -20,13 +20,11 @@ import csv
 import inspect
 import random
 from datetime import date as dt
-
 from typing import List, Optional, Tuple, Union
 
 from .config import get_local_conf, get_synced_conf, save_synced_conf
-from .utils import *
-
 from .gui.pokemanki_trade import *
+from .utils import *
 
 
 class Trades:
@@ -62,6 +60,7 @@ class Trades:
             img_path = f"{addon_dir}/pokemon_images/Exkywor.png"
 
             from typing import TYPE_CHECKING
+
             from aqt.qt import QDialog, qtmajor
 
             if TYPE_CHECKING or qtmajor >= 6:

@@ -16,9 +16,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import distutils.dir_util
 import json
 import shutil
-import distutils.dir_util
 from pathlib import Path
 from typing import Any, List, Tuple, Union
 

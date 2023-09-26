@@ -17,9 +17,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
-import shutil
 import random
-
+import shutil
 from typing import List, Tuple, Union
 
 from aqt import mw

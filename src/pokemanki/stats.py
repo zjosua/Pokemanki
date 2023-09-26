@@ -19,9 +19,8 @@
 from typing import List, Tuple
 
 import anki
-
-from aqt import mw
 from anki.utils import ids2str
+from aqt import mw
 
 from .config import get_synced_conf
 from .utils import *
