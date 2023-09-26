@@ -1,2 +1,6 @@
 [tool.black]
 extend-exclude = "^/src/pokemanki/libaddon"
+
+[tool.isort]
+profile = "black"
+extend_skip = ["src/pokemanki/libaddon/", "src/pokemanki/gui/forms/"]
