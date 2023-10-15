@@ -33,7 +33,14 @@
 Miscellaneous Qt utilities
 """
 
-from PyQt5.QtWidgets import QMessageBox
+from typing import TYPE_CHECKING
+
+from aqt.qt import qtmajor
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtWidgets import QMessageBox
+else:
+    from PyQt5.QtWidgets import QMessageBox
 
 
 def showInfo(message, parent=None, mode="info", title="Anki"):

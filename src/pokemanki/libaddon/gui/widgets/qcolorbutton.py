@@ -33,9 +33,18 @@
 Custom color-chooser
 """
 
-from PyQt5.QtCore import QSize
-from PyQt5.QtGui import QColor, QIcon, QPixmap
-from PyQt5.QtWidgets import QColorDialog, QPushButton, QWidget
+from typing import TYPE_CHECKING
+
+from aqt.qt import qtmajor
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtCore import QSize
+    from PyQt6.QtGui import QColor, QIcon, QPixmap
+    from PyQt6.QtWidgets import QColorDialog, QPushButton, QWidget
+else:
+    from PyQt5.QtCore import QSize
+    from PyQt5.QtGui import QColor, QIcon, QPixmap
+    from PyQt5.QtWidgets import QColorDialog, QPushButton, QWidget
 
 from ..._wrappers.typing import Optional
 

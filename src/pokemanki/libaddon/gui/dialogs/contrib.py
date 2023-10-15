@@ -37,16 +37,21 @@ Uses the following addon-level constants, if defined:
 ADDON.NAME, ADDON.AUTHOR_MAIL, ADDON.LINKS
 """
 
-from PyQt5.QtWidgets import QWidget
+from typing import TYPE_CHECKING
+
+from aqt.qt import qtmajor
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtWidgets import QWidget
+else:
+    from PyQt5.QtWidgets import QWidget
 
 from aqt.utils import openLink
 
 from ..._wrappers.types import ModuleType
 from ...addon import ADDON
-
-from ..helpers.label_formatter import formatLabels
 from ..content.about import getAboutString
-
+from ..helpers.label_formatter import formatLabels
 from .basic import BasicDialog
 from .htmlview import HTMLViewer
 

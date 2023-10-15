@@ -35,12 +35,20 @@ Custom hotkey selector
 NOTE: obsolete on PyQt5
 """
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QKeySequence
-from PyQt5.QtWidgets import QDialog, QPushButton, QVBoxLayout, QLabel
+from typing import TYPE_CHECKING
+
+from aqt.qt import qtmajor
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtCore import Qt
+    from PyQt6.QtGui import QKeySequence
+    from PyQt6.QtWidgets import QDialog, QLabel, QPushButton, QVBoxLayout
+else:
+    from PyQt5.QtCore import Qt
+    from PyQt5.QtGui import QKeySequence
+    from PyQt5.QtWidgets import QDialog, QPushButton, QVBoxLayout, QLabel
 
 from ...anki import ANKI
-
 
 PLATFORM_MODKEY_NAMES = {
     "lin": {"meta": "Meta", "ctrl": "Ctrl", "alt": "Alt", "shift": "Shift"},

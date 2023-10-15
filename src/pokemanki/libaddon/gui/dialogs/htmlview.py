@@ -33,12 +33,17 @@
 Simple dialog for viewing HTML
 """
 
-from PyQt5.QtWidgets import QTextBrowser, QVBoxLayout, QWidget
+from typing import TYPE_CHECKING
+
+from aqt.qt import qtmajor
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtWidgets import QTextBrowser, QVBoxLayout, QWidget
+else:
+    from PyQt5.QtWidgets import QTextBrowser, QVBoxLayout, QWidget
 
 from ..._wrappers.typing import Optional
-
 from ...anki import ANKI
-
 from .basic import BasicDialog
 
 

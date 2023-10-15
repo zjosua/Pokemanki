@@ -33,4 +33,11 @@
 Package for custom reusable Qt dialogs (Anki-specific)
 """
 
-from PyQt5.QtCore import QT_VERSION_STR  # noqa: F401
+from typing import TYPE_CHECKING
+
+from aqt.qt import qtmajor
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtCore import QT_VERSION_STR
+else:
+    from PyQt5.QtCore import QT_VERSION_STR  # noqa: F401

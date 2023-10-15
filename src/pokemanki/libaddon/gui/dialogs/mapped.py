@@ -34,13 +34,18 @@ Simple dialog with support for mapping widget state from/to dictionary
 keys and/or setter/getter methods.
 """
 
-from PyQt5.QtWidgets import QDialogButtonBox, QWidget
+from typing import TYPE_CHECKING
+
+from aqt.qt import qtmajor
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtWidgets import QDialogButtonBox, QWidget
+else:
+    from PyQt5.QtWidgets import QDialogButtonBox, QWidget
 
 from ..._wrappers.types import ModuleType
-from ..._wrappers.typing import Optional, Union, Any
-
+from ..._wrappers.typing import Any, Optional, Union
 from ...util.structures import getNestedValue, setNestedValue
-
 from .basic import BasicDialog
 
 __all__ = ["MappedDialog"]

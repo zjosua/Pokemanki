@@ -33,12 +33,18 @@
 Basic QDialog, extended with some quality-of-life improvements
 """
 
-from PyQt5.QtWidgets import QDialog, QWidget
+from typing import TYPE_CHECKING
 
-from ..helpers.common_interface import CommonWidgetInterface
+from aqt.qt import qtmajor
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtWidgets import QDialog, QWidget
+else:
+    from PyQt5.QtWidgets import QDialog, QWidget
 
 from ..._wrappers.types import ModuleType
 from ..._wrappers.typing import Optional
+from ..helpers.common_interface import CommonWidgetInterface
 
 __all__ = ["BasicDialog"]
 

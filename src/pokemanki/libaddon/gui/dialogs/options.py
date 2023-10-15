@@ -33,29 +33,33 @@
 Main options dialog
 """
 
-from PyQt5.QtCore import Qt, QUrl, QEvent
-from PyQt5.QtWidgets import QApplication, QWidget
+from typing import TYPE_CHECKING
+
+from aqt.qt import qtmajor
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtCore import QEvent, Qt, QUrl
+    from PyQt6.QtWidgets import QApplication, QWidget
+else:
+    from PyQt5.QtCore import Qt, QUrl, QEvent
+    from PyQt5.QtWidgets import QApplication, QWidget
 
 from aqt.utils import openLink, tooltip
 
-from ..._wrappers.typing import Optional, Union, Any
 from ..._wrappers.types import ModuleType
-
+from ..._wrappers.typing import Any, Optional, Union
 from ...addon import ADDON
 from ...anki import ANKI
 from ...anki.config.manager import ConfigManager
-
 from ...util.logging import (
-    toggleDebugging,
-    isDebuggingOn,
-    getLatestLog,
-    openLog,
     clearLog,
+    getLatestLog,
+    isDebuggingOn,
+    openLog,
+    toggleDebugging,
 )
-
 from ..content.about import getAboutString
 from ..helpers.label_formatter import formatLabels
-
 from .mapped import MappedDialog
 
 

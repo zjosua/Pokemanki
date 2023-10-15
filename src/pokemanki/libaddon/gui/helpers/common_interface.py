@@ -42,35 +42,58 @@ but that is not feasible when primarily working with Qt designer generated
 UIs.
 """
 
-from collections import MutableSequence, MutableSet, MutableMapping
+from collections import MutableMapping, MutableSequence, MutableSet
+from typing import TYPE_CHECKING
 
-from PyQt5.QtCore import Qt, QDateTime
-from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import (
-    QCheckBox,
-    QComboBox,
-    QDateEdit,
-    QDoubleSpinBox,
-    QFontComboBox,
-    QLabel,
-    QLineEdit,
-    QListWidget,
-    QListWidgetItem,
-    QPlainTextEdit,
-    QPushButton,
-    QRadioButton,
-    QSlider,
-    QSpinBox,
-    QTextEdit,
-    QWidget,
-)
+from aqt.qt import qtmajor
 
-from ..._wrappers.typing import Union, Optional, Any
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtCore import QDateTime, Qt
+    from PyQt6.QtGui import QFont
+    from PyQt6.QtWidgets import (
+        QCheckBox,
+        QComboBox,
+        QDateEdit,
+        QDoubleSpinBox,
+        QFontComboBox,
+        QLabel,
+        QLineEdit,
+        QListWidget,
+        QListWidgetItem,
+        QPlainTextEdit,
+        QPushButton,
+        QRadioButton,
+        QSlider,
+        QSpinBox,
+        QTextEdit,
+        QWidget,
+    )
+else:
+    from PyQt5.QtCore import Qt, QDateTime
+    from PyQt5.QtGui import QFont
+    from PyQt5.QtWidgets import (
+        QCheckBox,
+        QComboBox,
+        QDateEdit,
+        QDoubleSpinBox,
+        QFontComboBox,
+        QLabel,
+        QLineEdit,
+        QListWidget,
+        QListWidgetItem,
+        QPlainTextEdit,
+        QPushButton,
+        QRadioButton,
+        QSlider,
+        QSpinBox,
+        QTextEdit,
+        QWidget,
+    )
 
+from ..._wrappers.typing import Any, Optional, Union
 from ...util.structures import getNestedAttribute
-
-from ..widgets.qkeygrabber import QKeyGrabButton
 from ..widgets.qcolorbutton import QColorButton
+from ..widgets.qkeygrabber import QKeyGrabButton
 
 # TODO: Switch to QKeySequenceEdit once Qt4 support dropped
 # TODO: add support for QSlider

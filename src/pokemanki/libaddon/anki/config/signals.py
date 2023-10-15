@@ -1,4 +1,11 @@
-from PyQt5.QtCore import pyqtSignal, QObject
+from typing import TYPE_CHECKING
+
+from aqt.qt import qtmajor
+
+if TYPE_CHECKING or qtmajor >= 6:
+    from PyQt6.QtCore import QObject, pyqtSignal
+else:
+    from PyQt5.QtCore import QObject, pyqtSignal
 
 
 class ConfigSignals(QObject):
