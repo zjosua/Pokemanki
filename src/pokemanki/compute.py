@@ -242,7 +242,7 @@ def FirstPokemon() -> None:
         msgbox.exec()
         deckmon = msgbox.clickedButton().text()
         if deckmon:
-            deck = mw.col.decks.byName(inp)["id"]
+            deck = mw.col.decks.by_name(inp)["id"]
             # stats = mw.col.db.all("""select id, ivl from cards where did in (%s)""" % deck)
 
             # cardIds = mw.col.db.all("""select id from cards where did in (%s)""" % deck)
