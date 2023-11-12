@@ -246,7 +246,9 @@ def FirstPokemon() -> None:
             # stats = mw.col.db.all("""select id, ivl from cards where did in (%s)""" % deck)
 
             # cardIds = mw.col.db.all("""select id from cards where did in (%s)""" % deck)
-            global_startdate = get_synced_conf().get("global_startdate", 1160006400000)
+            conf = get_synced_conf()
+            global_startdate = conf.get("global_startdate", 1160006400000)
+            global_xp_modifier = conf.get("xp_modifier_global", 1)
             cardIds = cardIdsFromDeckIds(mw.col.db, [deck])
             stats = []
             for cid in cardIds:
@@ -255,7 +257,7 @@ def FirstPokemon() -> None:
 
             sumivl = 0
             for id, ivl in stats:
-                adjustedivl = 100 * (ivl / 100) ** 0.5
+                adjustedivl = global_xp_modifier * 10 * ivl**0.5
                 sumivl += adjustedivl
             if len(stats) != 0:
                 Level = int(sumivl / len(stats) + 0.5)
@@ -358,15 +360,17 @@ def MultiPokemon(
     # If no results, return
     if len(results) == 0:
         return
-    prestigelist = get_synced_conf()["prestigelist"]
-    everstonelist = get_synced_conf()["everstonelist"]
-    everstonepokemonlist = get_synced_conf()["everstonepokemonlist"]
+    conf = get_synced_conf()
+    prestigelist = conf.get("prestigelist", [])
+    everstonelist = conf.get("everstonelist", [])
+    everstonepokemonlist = conf.get("everstonepokemonlist", [])
+    global_xp_modifier = conf.get("xp_modifier_global", 1)
     # Determine level of Pokemon (if zero, do not assign Pokemon)
     for item in results:
         result = item[1]
         sumivl = 0
         for id, ivl in result:
-            adjustedivl = 100 * (ivl / 100) ** (0.5)
+            adjustedivl = global_xp_modifier * 10 * ivl**0.5
             sumivl += adjustedivl
         if len(result) == 0:
             continue
@@ -586,12 +590,14 @@ def TagPokemon() -> (
     results = TagStats()
     if len(results) == 0:
         return
-    prestigelist = get_synced_conf()["prestigelist"]
+    conf = get_synced_conf()
+    prestigelist = conf.get("prestigelist", [])
+    global_xp_modifier = conf.get("xp_modifier_global", 1)
     for item in results:
         result = item[1]
         sumivl = 0
         for id, ivl in result:
-            adjustedivl = 100 * (ivl / 100) ** (0.5)
+            adjustedivl = global_xp_modifier * 10 * ivl**0.5
             sumivl += adjustedivl
         if len(result) == 0:
             continue

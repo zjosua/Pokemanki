@@ -112,11 +112,10 @@
           </item>
           <item row="2" column="1">
            <widget class="QDoubleSpinBox" name="dsb_xp_modifier_global">
-            <property name="enabled">
-             <bool>false</bool>
-            </property>
             <property name="toolTip">
-             <string>not implemented yet</string>
+             <string>Adjusts how many XP are gained per review
+min 0.001
+max 1'000</string>
             </property>
             <property name="decimals">
              <number>3</number>
