@@ -166,10 +166,19 @@ def replace_gears(
     soup = BeautifulSoup(content.tree, "html.parser")
     for tr in soup.select("tr[id]"):
         deck_id = int(tr["id"])
-        name = next((pokemon[0] for pokemon in pokemons if pokemon[1] == deck_id), None)
-        if name:
-            tr.select("img.gears")[0]["src"] = f"{pkmnimgfolder}/{name}.png"
-            tr.select("img.gears")[0]["class"] = "gears pokemon"
+        name_and_level = next(
+            ((pokemon[0], pokemon[2]) for pokemon in pokemons if pokemon[1] == deck_id),
+            None,
+        )
+        if not name_and_level:
+            continue
+        if name_and_level[1] < 5:
+            tr.select("img.gears")[0]["src"] = f"{pkmnimgfolder}/Egg.png"
+        else:
+            tr.select("img.gears")[0][
+                "src"
+            ] = f"{pkmnimgfolder}/{name_and_level[0]}.png"
+        tr.select("img.gears")[0]["class"] = "gears pokemon"
     style = soup.new_tag("style")
     style.string = ".gears.pokemon{filter:none;opacity:1}"
     soup.append(style)
