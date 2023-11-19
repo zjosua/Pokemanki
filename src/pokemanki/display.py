@@ -90,7 +90,13 @@ def _show(
             txt += '<div class="pk-st-single">'
             multi = False
         else:
-            txt += '<div class="pk-st-container">'
+            conf = get_local_conf()
+            card_flow = conf.get("align_cards", "wrap")
+            if card_flow == "wrap":
+                txt += '<div class="pk-st-container">'
+            elif card_flow == "hscroll":
+                txt += '<div class="pk-st-container" style="flex-wrap: nowrap; \
+                        justify-content: flex-start;">'
             multi = True
 
         sortedData = sorted(data, key=lambda k: k[2], reverse=True)
